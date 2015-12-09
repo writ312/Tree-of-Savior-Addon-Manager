@@ -2,12 +2,26 @@
 <html lang="en" data-ng-app="app">
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title></title>
+
+	<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <h1>Tree of Savior Mod Manager!</h1>
+
+	<ng-view></ng-view>
+
     We are using node <script>document.write(process.versions.node)</script>,
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+
+	<script src="./bower_components/angular/angular.js"></script>
+	<script src="./bower_components/angular-route/angular-route.js"></script>
+	<script src="./bower_components/angular-animate/angular-animate.js"></script>
+	<script src="./bower_components/angular-aria/angular-aria.js"></script>
+	<script src="./bower_components/angular-material/angular-material.js"></script>
+
+	<script src="./scripts/app.js"></script>
+	<script src="./scripts/main/mainController.js"></script>
   </body>
 </html>

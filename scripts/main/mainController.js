@@ -1,9 +1,7 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('mainController', [MainController]);
+        .controller('mainController', function($scope) {
 
-    function CustomerController(customerService, $q, $mdDialog) {
-    }
-
+		});
 })();
