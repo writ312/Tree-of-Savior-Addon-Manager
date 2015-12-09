@@ -1,31 +1,28 @@
-<h1>Packages</h1>
-
 <div ng-cloak="" class="tabsdemoDynamicHeight">
-  <md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="Install Mod">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Install Mod</h1>
-          <p>Browse the available mods below.</p>
-        </md-content>
-      </md-tab>
-      <md-tab label="Uninstall Mod">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Uninstall Mod</h1>
-          <p>Choose the mod that you no longer want to uninstall it.</p>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
-</div>
-
-<div>
-	<md-list ng-cloak>
-		<md-subheader class="md-no-sticky">Check a mod to install it</md-subheader>
-		<md-list-item ng-repeat="mod in mods">
-			<p> {{ mod.name }} (by {{mod.author}})</p>
-			<md-checkbox class="md-secondary" ng-model="mod.isInstalled"></md-checkbox>
-		</md-list-item>
-		<md-divider></md-divider>
-	</md-list>
+	<md-content>
+		<md-tabs md-dynamic-height="" md-border-bottom="">
+			<md-tab label="Install Mod">
+				<md-content class="md-padding">
+					<h1 class="md-display-2">Install Mod</h1>
+					<p><strong>Browse the available mods below.</strong></p>
+					<div>
+						<md-list ng-cloak>
+							<md-subheader class="md-no-sticky">Check a mod to install it</md-subheader>
+							<md-list-item ng-repeat="mod in mods">
+								<p> {{ mod.name }} (by {{mod.author}})</p>
+								<md-checkbox class="md-secondary" ng-model="mod.isInstalled"></md-checkbox>
+							</md-list-item>
+							<md-divider></md-divider>
+						</md-list>
+					</div>
+				</md-content>
+			</md-tab>
+			<md-tab label="Uninstall Mod">
+				<md-content class="md-padding">
+					<h1 class="md-display-2">Uninstall Mod</h1>
+					<p>Choose the mod that you no longer want to uninstall it.</p>
+				</md-content>
+			</md-tab>
+		</md-tabs>
+	</md-content>
 </div>
