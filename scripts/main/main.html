@@ -1,6 +1,23 @@
 <div ng-cloak="" class="tabsdemoDynamicHeight">
 	<md-content>
 		<md-tabs md-dynamic-height="" md-border-bottom="">
+			<md-tab label="Settings">
+				<md-content class="md-padding">
+					<h1 class="md-display-2">Settings</h1>
+					<p><strong>Configure your settings below. Please specify your Tree of Savior install directory.</strong></p>
+					<md-content layout-padding>
+						<form name="userForm">
+							<div layout-gt-sm="row">
+								<md-input-container class="md-block" flex-gt-sm>
+									<label>Tree of Savior Directory</label>
+									<input ng-model="treeOfSaviorDirectory">
+								</md-input-container>
+								<md-button class="md-raised" ng-click="browseForDirectory();">Browse...</md-button>
+							</div>
+						</form>
+					</md-content>
+				</md-content>
+			</md-tab>
 			<md-tab label="Install Mod">
 				<md-content class="md-padding">
 					<h1 class="md-display-2">Install Mod</h1>
