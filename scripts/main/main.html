@@ -10,9 +10,9 @@
 							<div layout-gt-sm="row">
 								<md-input-container class="md-block" flex-gt-sm>
 									<label>Tree of Savior Directory</label>
-									<input ng-model="treeOfSaviorDirectory">
+									<input ng-model="mainController.treeOfSaviorDirectory">
 								</md-input-container>
-								<md-button class="md-raised" ng-click="browseForDirectory();">Browse...</md-button>
+								<md-button class="md-raised" ng-click="mainController.browseForDirectory();">Browse...</md-button>
 							</div>
 						</form>
 					</md-content>
@@ -25,8 +25,9 @@
 					<div>
 						<md-list ng-cloak>
 							<md-subheader class="md-no-sticky">Check a mod to install it</md-subheader>
-							<md-list-item ng-repeat="mod in mods">
+							<md-list-item ng-repeat="mod in mainController.addons">
 								<p> {{ mod.name }} (by {{mod.author}})</p>
+								<p> {{ mod.short }}</p>
 								<md-checkbox class="md-secondary" ng-model="mod.isInstalled"></md-checkbox>
 							</md-list-item>
 							<md-divider></md-divider>
