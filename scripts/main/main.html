@@ -18,23 +18,33 @@
 					</md-content>
 				</md-content>
 			</md-tab>
+
 			<md-tab label="Install Mod">
-				<md-content class="md-padding">
-					<h1 class="md-display-2">Install Mod</h1>
-					<p><strong>Browse the available mods below.</strong></p>
-					<div>
-						<md-list ng-cloak>
-							<md-subheader class="md-no-sticky">Check a mod to install it</md-subheader>
-							<md-list-item ng-repeat="mod in mainController.addons">
-								<p> {{ mod.name }} (by {{mod.author}})</p>
-								<p> {{ mod.short }}</p>
-								<md-checkbox class="md-secondary" ng-model="mod.isInstalled"></md-checkbox>
-							</md-list-item>
-							<md-divider></md-divider>
-						</md-list>
-					</div>
+				<md-content flex md-scroll-y>
+					<ui-view layout="column" layout-fill layout-padding>
+						<md-card flex-gt-sm="90" flex-gt-md="80">
+							<md-card-content>
+								<h2>Mods</h2>
+								<md-list>
+									<md-item ng-repeat="mod in mainController.addons | filter:search">
+										<md-item-content>
+											<div class="md-tile-content">
+												<h3>{{ mod.name }} (by {{mod.author}})</h3>
+												<p>{{ mod.short }}</p>
+											</div>
+											<div class="md-tile-right inset" hide-sm>
+												<md-button class="md-raised md-primary" data-ng-click="mainController.installMod(mod);">Install</md-button>
+											</div>
+										</md-item-content>
+									</md-item>
+									<md-divider></md-divider>
+								</md-list>
+							</md-card-content>
+						</md-card>
+					</ui-view>
 				</md-content>
 			</md-tab>
+
 			<md-tab label="Uninstall Mod">
 				<md-content class="md-padding">
 					<h1 class="md-display-2">Uninstall Mod</h1>

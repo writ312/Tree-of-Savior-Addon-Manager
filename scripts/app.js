@@ -9,7 +9,14 @@
         'ngMaterial',
         'ngAnimate'
     ])
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', '$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
+			// $mdThemingProvider.theme('default')
+			//     .primaryPalette('pink')
+			//     .accentPalette('orange');
+
+			$mdThemingProvider.theme('default')
+				.dark();
+
             $routeProvider.when('/', {
                 templateUrl: _templateBase + '/main/main.html' ,
                 controller: 'MainController',
