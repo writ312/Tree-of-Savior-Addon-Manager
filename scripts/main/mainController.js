@@ -61,7 +61,10 @@
 				response.on("data", function(chunk) {
 	                body += chunk;
 	                cur += chunk.length;
-					console.log("Downloading " + (100.0 * cur / len).toFixed(2) + "% " + (cur / 1048576).toFixed(2) + " mb\r" + ". Total size: " + total.toFixed(2) + " mb");
+					var percent = (100.0 * cur / len).toFixed(2);
+					console.log("Downloading " + percent + "% " + (cur / 1048576).toFixed(2) + " mb\r" + ". Total size: " + total.toFixed(2) + " mb");
+
+					mod.installProgress = percent;
 	            });
 				console.log(response);
 				response.pipe(file);

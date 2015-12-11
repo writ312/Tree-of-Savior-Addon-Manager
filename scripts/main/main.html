@@ -35,6 +35,7 @@
 											<div class="md-tile-right inset" hide-sm>
 												<md-button class="md-raised md-primary" data-ng-click="mainController.installMod(mod);">Install</md-button>
 											</div>
+											<md-progress-linear md-mode="determinate" value="{{mod.installProgress}}"></md-progress-linear>
 										</md-item-content>
 									</md-item>
 									<md-divider></md-divider>
