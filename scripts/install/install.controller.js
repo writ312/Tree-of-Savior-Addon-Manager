@@ -61,10 +61,12 @@
 
 				response.on("end", function() {
 					mod.isDownloading = false;
+					$scope.$apply();
 				});
 
 				request.on("error", function(error) {
 					mod.isDownloading = false;
+					$scope.$apply();
 				});
 
 				response.pipe(file);
