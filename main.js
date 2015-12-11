@@ -25,6 +25,8 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
+  mainWindow.setMenuBarVisibility(false);
+
   mainWindow.setTitle("Tree of Savior Mod Manager");
 
   // and load the index.html of the app.
