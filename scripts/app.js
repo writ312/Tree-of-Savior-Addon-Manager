@@ -9,7 +9,7 @@
         'ngMaterial',
         'ngAnimate'
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 			$mdThemingProvider.theme('default')
 				.dark();
 
