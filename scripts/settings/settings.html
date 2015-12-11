@@ -1,0 +1,15 @@
+<md-content class="md-padding">
+	<h1 class="md-display-2">Settings</h1>
+	<p><strong>Configure your settings below. Please specify your Tree of Savior install directory.</strong></p>
+	<md-content layout-padding>
+		<form name="userForm">
+			<div layout-gt-sm="row">
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>Tree of Savior Directory</label>
+					<input ng-model="settingsController.treeOfSaviorDirectory">
+				</md-input-container>
+				<md-button class="md-raised" ng-click="settingsController.browseForDirectory();">Browse...</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-content>

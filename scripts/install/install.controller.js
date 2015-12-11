@@ -3,16 +3,15 @@
 
     angular
         .module('app')
-        .controller('MainController', MainController);
+        .controller('InstallController', InstallController);
 
-    MainController.$inject = ['AddonFactory'];
+    InstallController.$inject = ['$scope', 'AddonFactory'];
 
     /* @ngInject */
-    function MainController(AddonFactory) {
+    function InstallController($scope, AddonFactory) {
         var viewModel = this;
 		viewModel.addons = [];
 		viewModel.getAddons = getAddons;
-		viewModel.browseForDirectory = browseForDirectory;
 		viewModel.installMod = installMod;
 		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
 
@@ -30,16 +29,6 @@
 				return viewModel.addons;
 			});
 		}
-
-		function browseForDirectory() {
-			var fs = require('fs');
-			var modDirectory = viewModel.treeOfSaviorDirectory + "mods";
-			fs.mkdir(viewModel.treeOfSaviorDirectory + "mods");
-
-			var remote = require('remote');
-			var dialog = remote.require('dialog');
-			viewModel.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
-		};
 
 		function installMod(mod) {
 			mod.url = "http://speedtest.atlanta.linode.com/100MB-atlanta.bin";

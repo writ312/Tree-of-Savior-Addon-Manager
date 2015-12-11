@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="app">
-  <head>
-    <meta charset="UTF-8">
-    <title>Tree of Savior Mod Manager</title>
+	<head>
+		<meta charset="UTF-8">
+		<title>Tree of Savior Mod Manager</title>
 
-	<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
-	<link rel="stylesheet" href="./css/main.css" />
-  </head>
-  <body ng-cloak>
-	<ng-view></ng-view>
+		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+		<link rel="stylesheet" href="./css/main.css" />
+	</head>
+	<body ng-cloak>
 
-	<script src="./bower_components/angular/angular.js"></script>
-	<script src="./bower_components/angular-route/angular-route.js"></script>
-	<script src="./bower_components/angular-resource/angular-resource.js"></script>
-	<script src="./bower_components/angular-animate/angular-animate.js"></script>
-	<script src="./bower_components/angular-aria/angular-aria.js"></script>
-	<script src="./bower_components/angular-material/angular-material.js"></script>
+		<a ui-sref="settings">Settings</a>
+		<a ui-sref="install">Install</a>
 
-	<script src="./scripts/app.js"></script>
-	<script src="./scripts/main/mainController.js"></script>
-	<script src="./scripts/main/mods.factory.js"></script>
-  </body>
+		<div ui-view></div>
+
+		<script src="./bower_components/angular/angular.js"></script>
+		<script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="./bower_components/angular-resource/angular-resource.js"></script>
+		<script src="./bower_components/angular-animate/angular-animate.js"></script>
+		<script src="./bower_components/angular-aria/angular-aria.js"></script>
+		<script src="./bower_components/angular-material/angular-material.js"></script>
+
+		<script src="./scripts/app.js"></script>
+		<script src="./scripts/settings/settings.controller.js"></script>
+		<script src="./scripts/install/install.controller.js"></script>
+		<script src="./scripts/mods/mods.factory.js"></script>
+	</body>
 </html>
