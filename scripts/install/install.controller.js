@@ -19,7 +19,6 @@
 
         function activate() {
 			return getAddons().then(function() {
-				console.log("activated main controller");
 			});
         }
 
