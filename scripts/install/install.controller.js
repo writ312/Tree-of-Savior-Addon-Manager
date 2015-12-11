@@ -54,7 +54,9 @@
 					//console.log("Downloading " + percent + "% " + (cur / 1048576).toFixed(2) + " mb\r" + ". Total size: " + total.toFixed(2) + " mb");
 
 					mod.installProgress = percent;
-					console.log("prog: " + mod.installProgress);
+
+					// TODO: Is there another way to update the progress bar properly besides using $scope here?
+					$scope.$apply();
 				});
 
 				response.on("end", function() {
