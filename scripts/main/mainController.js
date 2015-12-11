@@ -9,8 +9,6 @@
 
     /* @ngInject */
     function MainController(AddonFactory) {
-		console.log("main controller");
-
         var viewModel = this;
 		viewModel.addons = [];
 		viewModel.getAddons = getAddons;
@@ -32,13 +30,6 @@
 				return viewModel.addons;
 			});
 		}
-
-		/*
-		$scope.mods = [
-			{ name: 'expviewer', author: 'Excrulon', isInstalled: false },
-			{ name: 'mobframes', author: 'SecurityRisk', isInstalled: false }
-		];
-		*/
 
 		function browseForDirectory() {
 			var fs = require('fs');
@@ -64,12 +55,13 @@
 				var len = parseInt(response.headers['content-length'], 10);
 				var body = "";
             	var cur = 0;
-				var total = len / 1048576; //1048576 - bytes in  1Megabyte
+				var BYTES_IN_MEGABYTE = 1048576;
+				var total = len / BYTES_IN_MEGABYTE;
 
 				response.on("data", function(chunk) {
 	                body += chunk;
 	                cur += chunk.length;
-					console.log("Downloading " + (100.0 * cur / len).toFixed(2) + "% " + (cur / 1048576).toFixed(2) + " mb\r" + ".<br/> Total size: " + total.toFixed(2) + " mb");
+					console.log("Downloading " + (100.0 * cur / len).toFixed(2) + "% " + (cur / 1048576).toFixed(2) + " mb\r" + ". Total size: " + total.toFixed(2) + " mb");
 	            });
 				console.log(response);
 				response.pipe(file);
