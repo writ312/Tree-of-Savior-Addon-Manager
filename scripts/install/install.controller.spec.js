@@ -9,7 +9,11 @@ describe("Install Controller", function() {
 		});
 	}));
 
-	it('getAddons method should be defined', inject(function($controller) {
+	it('getAddons method should be defined', function() {
 		expect(installController.getAddons).toBeDefined();
-	}));
+	});
+
+	it('installMod method should be defined', function() {
+		expect(installController.installMod).toBeDefined();
+	});
 });
