@@ -10,12 +10,18 @@
         'ngAnimate'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
-			$mdThemingProvider.theme('default')
-				.dark();
+			//$mdThemingProvider.theme('default')
+				//.dark();
 
-			$urlRouterProvider.otherwise("/settings");
+			$urlRouterProvider.otherwise("/");
 
 			$stateProvider
+				.state('main', {
+					url: '/',
+					controller: 'MainController as mainController',
+					templateUrl: _templateBase + '/main/main.html'
+				});
+				/*
 				.state('settings', {
 					url: '/settings',
 					controller: 'SettingsController as settingsController',
@@ -26,6 +32,7 @@
 					controller: 'InstallController as installController',
 					templateUrl: _templateBase + '/install/install.html'
 				});
+				*/
         }
     ]);
 })();

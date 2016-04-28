@@ -23,7 +23,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600, icon: 'resources/tos-exp.png'});
 
   mainWindow.setMenuBarVisibility(false);
 

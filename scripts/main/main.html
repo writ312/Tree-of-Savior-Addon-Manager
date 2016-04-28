@@ -1,0 +1,57 @@
+<md-content>
+	<md-tabs md-dynamic-height md-border-bottom>
+
+		<md-tab label="Settings">
+			<md-content class="md-padding">
+				<h1 class="md-display-2">Settings</h1>
+				<p>Configure your settings below. Please specify your Tree of Savior install directory.</p>
+				<form name="userForm">
+					<div layout="row" flex>
+						<md-input-container flex class="md-icon-float md-block md-title">
+							<label>Tree of Savior Directory</label>
+							<input type="text">
+						</md-input-container>
+						<div>
+							<md-button class="md-raised" ng-click="settingsController.browseForDirectory();">Browse...</md-button>
+						</div>
+					</div>
+				</form>
+			</md-content>
+		</md-tab>
+
+		<md-tab label="Featured">
+			<md-content class="md-padding">
+			</md-content>
+		</md-tab>
+
+		<md-tab label="Browse">
+			<md-content class="md-padding">
+				<md-content class="md-padding" layout-xs="column" layout="row">
+					<div flex layout="column">
+						<md-card data-ng-repeat="addon in mainController.addons" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+							<md-card-title>
+								<md-card-title-text>
+									<span class="md-headline">{{addon.name}}</span>
+									<span class="md-subhead">{{addon.author}}</span>
+									<p class="md-body-1">{{addon.description}}</p>
+								</md-card-title-text>
+								<md-card-title-media>
+									<div class="md-media-lg card-media"></div>
+								</md-card-title-media>
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+								<md-button>Website</md-button>
+								<md-button>Install</md-button>
+							</md-card-actions>
+						</md-card>
+					</div>
+				</md-content>
+			</md-content>
+		</md-tab>
+
+		<md-tab label="Installed">
+			<md-content class="md-padding">
+			</md-content>
+		</md-tab>
+	</md-tabs>
+</md-content>
