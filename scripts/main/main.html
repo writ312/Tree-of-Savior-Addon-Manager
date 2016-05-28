@@ -33,15 +33,22 @@
 								<md-card-title-text>
 									<span class="md-headline">{{addon.name}}</span>
 									<span class="md-subhead">{{addon.author}}</span>
+									<md-chips data-ng-model="addon.tags" readonly="true">
+									</md-chips>
 									<p class="md-body-1">{{addon.description}}</p>
+									<div data-ng-show="addon.isDownloading">
+										<md-progress-linear md-mode="determinate" value="{{addon.installProgress}}"></md-progress-linear>
+										{{addon.installProgress}}%
+										<md-progress-circular md-mode="determinate" value="{{addon.installProgress}}"></md-progress-circular>
+									</div>
 								</md-card-title-text>
 								<md-card-title-media>
 									<div class="md-media-lg card-media"></div>
 								</md-card-title-media>
 							</md-card-title>
 							<md-card-actions layout="row" layout-align="end center">
-								<md-button>Website</md-button>
-								<md-button>Install</md-button>
+								<md-button data-ng-click="mainController.openWebsite()">Website</md-button>
+								<md-button data-ng-click="mainController.install(addon)">Install</md-button>
 							</md-card-actions>
 						</md-card>
 					</div>

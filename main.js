@@ -27,7 +27,7 @@ app.on('ready', function() {
 
   mainWindow.setMenuBarVisibility(false);
 
-  mainWindow.setTitle("Tree of Savior Mod Manager");
+  mainWindow.setTitle("Tree of Savior Addon Manager");
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
