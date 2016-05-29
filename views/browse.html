@@ -16,12 +16,8 @@
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
 					<md-button data-ng-click="browseController.openWebsite(addon.website)">Website</md-button>
-					<div data-ng-show="!addon.isDownloading">
-						<md-button data-ng-click="browseController.install(addon)">Install</md-button>
-					</div>
-					<div data-ng-show="addon.isDownloading">
-						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-					</div>
+					<md-button data-ng-click="browseController.install(addon)" data-ng-show="!addon.isDownloading">Install</md-button>
+					<md-progress-circular md-mode="indeterminate" data-ng-show="addon.isDownloading"></md-progress-circular>
 				</md-card-actions>
 			</md-card>
 		</div>

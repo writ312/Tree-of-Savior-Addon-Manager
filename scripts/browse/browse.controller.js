@@ -5,12 +5,12 @@
 		.module('app')
 		.controller('BrowseController', BrowseController);
 
-	BrowseController.$inject = ['$http'];
+	BrowseController.$inject = ['$scope', '$http'];
 
 	/* @ngInject */
-	function BrowseController($http) {
+	function BrowseController($scope, $http) {
 		var viewModel = this;
-		
+
 		viewModel.browseForDirectory = browseForDirectory;
 		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
 
@@ -61,14 +61,14 @@
 
 			const storage = require('electron-json-storage');
 
-			addon.isDownloading = true;
-
 			viewModel.treeOfSaviorDirectory = "C:/Program Files (x86)/Steam/SteamApps/common/TreeOfSavior/addons/";
 
 			var modDirectory = viewModel.treeOfSaviorDirectory + "mods/";
 			var filename = modDirectory + "_" + addon.file + "-" + addon.unicode + "-" + addon.fileVersion + "." + addon.extension;
 
 			console.log("installing: " + addon.downloadUrl);
+
+			addon.isDownloading = true;
 
 			progress(request(addon.downloadUrl), {
 			})
@@ -79,8 +79,11 @@
 				console.log(err);
 			})
 			.on('end', function () {
-				console.log("download complete!");
-				addon.isDownloading = false;
+				console.log("download complete! " + addon.isDownloading);
+
+				$scope.$apply(function() {
+					addon.isDownloading = false;
+				});
 
 				storage.get("settings", function(error, data) {
 
@@ -102,10 +105,6 @@
 				});
 			})
 			.pipe(fs.createWriteStream(filename));
-		}
-
-		function downloadComplete(status) {
-			console.log("download complete: " + status);
 		}
 	}
 })();
