@@ -5,10 +5,10 @@
 		.module('app')
 		.controller('BrowseController', BrowseController);
 
-	BrowseController.$inject = ['$scope', '$http'];
+	BrowseController.$inject = ['$scope', '$http', 'installer'];
 
 	/* @ngInject */
-	function BrowseController($scope, $http) {
+	function BrowseController($scope, $http, installer) {
 		var viewModel = this;
 
 		viewModel.browseForDirectory = browseForDirectory;
@@ -51,61 +51,7 @@
 		};
 
 		viewModel.install = function(addon) {
-			var semver = require('semver');
-
-			console.log("ver: " + semver.gt('1.2.3', '9.8.7'));
-
-			var fs = require('fs');
-			var request = require('request');
-			var progress = require('request-progress');
-
-			const storage = require('electron-json-storage');
-
-			viewModel.treeOfSaviorDirectory = "C:/Program Files (x86)/Steam/SteamApps/common/TreeOfSavior/addons/";
-
-			var modDirectory = viewModel.treeOfSaviorDirectory + "mods/";
-			var filename = modDirectory + "_" + addon.file + "-" + addon.unicode + "-" + addon.fileVersion + "." + addon.extension;
-
-			console.log("installing: " + addon.downloadUrl);
-
-			addon.isDownloading = true;
-
-			progress(request(addon.downloadUrl), {
-			})
-			.on('progress', function (state) {
-				console.log(state);
-			})
-			.on('error', function (err) {
-				console.log(err);
-			})
-			.on('end', function () {
-				console.log("download complete! " + addon.isDownloading);
-
-				$scope.$apply(function() {
-					addon.isDownloading = false;
-					addon.isInstalled = true;
-				});
-
-				storage.get("settings", function(error, data) {
-
-					if(!data.installedAddons) {
-						data.installedAddons = [];
-					}
-
-					var installedAddon = {
-						key : addon.file,
-						releaseVersion : addon.releaseVersion,
-						fileVersion : addon.fileVersion,
-					};
-
-					data.installedAddons.push(installedAddon);
-
-					storage.set("settings", data, function(error) {
-						console.log("installed-addon data saved!");
-					});
-				});
-			})
-			.pipe(fs.createWriteStream(filename));
+			installer.install(addon, $scope);
 		}
 	}
 })();
