@@ -8,29 +8,43 @@
 	settings.$inject = ['$log'];
 
 	function settings($log) {
+		const storage = require('electron-json-storage');
+		const settingsFile = "settings";
+
 		var service = {
-			addInstalledAddon: addInstalledAddon
+			addInstalledAddon : addInstalledAddon
+			removeInstalledAddon : removeInstalledAddon
 		};
 
 		return service;
 
 		function addInstalledAddon(addon) {
-			var storage = require('electron-json-storage');
-
-			storage.get("settings", function(error, data) {
+			storage.get(settingsFile, function(error, data) {
 				if(!data.installedAddons) {
 					data.installedAddons = {};
 				}
 
 				data.installedAddons[addon.file] = addon;
+				saveInstalledAddons(data);
+			});
+		}
 
-				storage.set("settings", data, function(error) {
-					if(error) {
-						$log.error(error + ": " + addon);
-					} else {
-						$log.info("Wrote installed addon to settings: " + addon);
-					}
-				});
+		function removeInstalledAddon(addon) {
+			storage.get(settingsFile, function(error, data) {
+				if(data.installedAddons[data.file]) {
+					delete data.installedAddons[data.file];
+					saveInstalledAddons(data);
+				}
+			});
+		}
+
+		function saveInstalledAddons(data) {
+			storage.set(settingsFile, data, function(error) {
+				if(error) {
+					$log.error(error + ": " + data);
+				} else {
+					$log.info("Wrote installed addon to settings: " + data);
+				}
 			});
 		}
 	}
