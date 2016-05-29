@@ -10,13 +10,9 @@
     /* @ngInject */
     function SettingsController() {
         var viewModel = this;
+
 		viewModel.browseForDirectory = browseForDirectory;
 		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
-
-        activate();
-
-        function activate() {
-        }
 
 		function browseForDirectory() {
 			var fs = require('fs');

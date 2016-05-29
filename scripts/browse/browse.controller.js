@@ -3,13 +3,14 @@
 
 	angular
 		.module('app')
-		.controller('MainController', MainController);
+		.controller('BrowseController', BrowseController);
 
-	MainController.$inject = ['$scope', '$http'];
+	BrowseController.$inject = ['$http'];
 
 	/* @ngInject */
-	function MainController($scope, $http) {
+	function BrowseController($http) {
 		var viewModel = this;
+		
 		viewModel.browseForDirectory = browseForDirectory;
 		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
 

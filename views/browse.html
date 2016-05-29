@@ -1,0 +1,29 @@
+<md-content class="md-padding">
+	<md-content class="md-padding" layout-xs="column" layout="row">
+		<div flex layout="column">
+			<md-card data-ng-repeat="addon in browseController.addons" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{addon.name}}</span>
+						<span class="md-subhead">{{addon.author}}</span>
+						<md-chips data-ng-model="addon.tags" readonly="true">
+						</md-chips>
+						<p class="md-body-1">{{addon.description}}</p>
+					</md-card-title-text>
+					<md-card-title-media>
+						<div class="md-media-lg card-media"></div>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button data-ng-click="browseController.openWebsite(addon.website)">Website</md-button>
+					<div data-ng-show="!addon.isDownloading">
+						<md-button data-ng-click="browseController.install(addon)">Install</md-button>
+					</div>
+					<div data-ng-show="addon.isDownloading">
+						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					</div>
+				</md-card-actions>
+			</md-card>
+		</div>
+	</md-content>
+</md-content>
