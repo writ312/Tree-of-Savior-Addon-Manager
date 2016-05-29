@@ -53,5 +53,9 @@
 		viewModel.install = function(addon) {
 			installer.install(addon, $scope);
 		}
+
+		viewModel.uninstall = function(addon) {
+			installer.uninstall(addon, $scope);
+		}
 	}
 })();

@@ -9,7 +9,8 @@
 
 	function installer(settings) {
 		var service = {
-			install: install
+			install: install,
+			uninstall: uninstall
 		};
 
 		return service;
@@ -49,6 +50,10 @@
 				settings.addInstalledAddon(addon);
 			})
 			.pipe(fs.createWriteStream(filename));
+		}
+
+		function uninstall(addon, scope) {
+			settings.removeInstalledAddon(addon);
 		}
 	}
 })();

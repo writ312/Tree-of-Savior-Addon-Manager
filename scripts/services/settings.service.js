@@ -12,7 +12,7 @@
 		const settingsFile = "settings";
 
 		var service = {
-			addInstalledAddon : addInstalledAddon
+			addInstalledAddon : addInstalledAddon,
 			removeInstalledAddon : removeInstalledAddon
 		};
 
@@ -26,14 +26,21 @@
 
 				data.installedAddons[addon.file] = addon;
 				saveInstalledAddons(data);
+
+				$log.info("Saved adding addon: " + addon.file);
 			});
 		}
 
 		function removeInstalledAddon(addon) {
 			storage.get(settingsFile, function(error, data) {
-				if(data.installedAddons[data.file]) {
-					delete data.installedAddons[data.file];
+				if(error) {
+					$log.error("Could not remove installed addon: " + error + " " + data);
+				} else if(data.installedAddons[addon.file]) {
+					delete data.installedAddons[addon.file];
 					saveInstalledAddons(data);
+					$log.info("Saved removing addon: " + addon.file);
+				} else {
+					$log.warn("Addon " + addon.file + " can't be removed because it is not installed.");
 				}
 			});
 		}
