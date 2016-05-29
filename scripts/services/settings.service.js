@@ -13,7 +13,8 @@
 
 		var service = {
 			addInstalledAddon : addInstalledAddon,
-			removeInstalledAddon : removeInstalledAddon
+			removeInstalledAddon : removeInstalledAddon,
+			getInstalledAddons : getInstalledAddons
 		};
 
 		return service;
@@ -41,6 +42,16 @@
 					$log.info("Saved removing addon: " + addon.file);
 				} else {
 					$log.warn("Addon " + addon.file + " can't be removed because it is not installed.");
+				}
+			});
+		}
+
+		function getInstalledAddons(callback) {
+			return storage.get(settingsFile, function(error, data) {
+				if(error) {
+					$log.error("Could not get installed addons: " + error);
+				} else {
+					return callback(data.installedAddons);
 				}
 			});
 		}
