@@ -40,8 +40,6 @@
 						addon.failedInstall = true;
 					});
 
-					console.log("unlinking");
-
 					return;
 				} else {
 					var fs = require('fs');
@@ -54,8 +52,6 @@
 							addon.isInstalled = false;
 						});
 						fs.unlink(destinationFile);
-
-						console.log("file request error");
 
 						return;
 					});
