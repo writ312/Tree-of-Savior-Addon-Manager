@@ -17,9 +17,9 @@
 					</md-card-title-media>
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
-					<md-button data-ng-click="browseController.openWebsite(addon.website)">Website</md-button>
-					<md-button data-ng-click="browseController.install(addon)" data-ng-show="!addon.isDownloading && !addon.isInstalled">Install</md-button>
-					<md-button data-ng-click="browseController.uninstall(addon)" data-ng-show="addon.isInstalled">Uninstall</md-button>
+					<md-button data-ng-click="browseController.openWebsite(addon.website)" class="md-raised">Website</md-button>
+					<md-button data-ng-click="browseController.install(addon)" class="md-raised" data-ng-class="{'md-warn': true}" data-ng-show="!addon.isDownloading && !addon.isInstalled">Install</md-button>
+					<md-button data-ng-click="browseController.uninstall(addon)" class="md-raised" data-ng-show="addon.isInstalled">Uninstall</md-button>
 					<md-progress-circular md-mode="indeterminate" data-ng-show="addon.isDownloading"></md-progress-circular>
 				</md-card-actions>
 			</md-card>
