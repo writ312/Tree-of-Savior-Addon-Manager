@@ -19,10 +19,10 @@
 
 			storage.get("settings", function(error, data) {
 				if(!data.installedAddons) {
-					data.installedAddons = [];
+					data.installedAddons = {};
 				}
 
-				data.installedAddons.push(addon);
+				data.installedAddons[addon.file] = addon;
 
 				storage.set("settings", data, function(error) {
 					if(error) {
