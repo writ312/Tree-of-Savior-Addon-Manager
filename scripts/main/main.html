@@ -37,9 +37,7 @@
 									</md-chips>
 									<p class="md-body-1">{{addon.description}}</p>
 									<div data-ng-show="addon.isDownloading">
-										<md-progress-linear md-mode="determinate" value="{{addon.installProgress}}"></md-progress-linear>
-										{{addon.installProgress}}%
-										<md-progress-circular md-mode="determinate" value="{{addon.installProgress}}"></md-progress-circular>
+										<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 									</div>
 								</md-card-title-text>
 								<md-card-title-media>
