@@ -5,9 +5,9 @@
 		.module('app')
 		.factory('installer', installer);
 
-	installer.$inject = [];
+	installer.$inject = ['settings'];
 
-	function installer() {
+	function installer(settings) {
 		var service = {
 			install: install
 		};
@@ -46,23 +46,7 @@
 					addon.isInstalled = true;
 				});
 
-				storage.get("settings", function(error, data) {
-					if(!data.installedAddons) {
-						data.installedAddons = [];
-					}
-
-					var installedAddon = {
-						key : addon.file,
-						releaseVersion : addon.releaseVersion,
-						fileVersion : addon.fileVersion,
-					};
-
-					data.installedAddons.push(installedAddon);
-
-					storage.set("settings", data, function(error) {
-						console.log("installed-addon data saved!");
-					});
-				});
+				settings.addInstalledAddon(addon);
 			})
 			.pipe(fs.createWriteStream(filename));
 		}
