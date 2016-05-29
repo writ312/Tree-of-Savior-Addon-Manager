@@ -36,17 +36,19 @@
 									<md-chips data-ng-model="addon.tags" readonly="true">
 									</md-chips>
 									<p class="md-body-1">{{addon.description}}</p>
-									<div data-ng-show="addon.isDownloading">
-										<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-									</div>
 								</md-card-title-text>
 								<md-card-title-media>
 									<div class="md-media-lg card-media"></div>
 								</md-card-title-media>
 							</md-card-title>
 							<md-card-actions layout="row" layout-align="end center">
-								<md-button data-ng-click="mainController.openWebsite()">Website</md-button>
-								<md-button data-ng-click="mainController.install(addon)">Install</md-button>
+								<md-button data-ng-click="mainController.openWebsite(addon.website)">Website</md-button>
+								<div data-ng-show="!addon.isDownloading">
+									<md-button data-ng-click="mainController.install(addon)">Install</md-button>
+								</div>
+								<div data-ng-show="addon.isDownloading">
+									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+								</div>
 							</md-card-actions>
 						</md-card>
 					</div>

@@ -17,8 +17,6 @@
 			var addons = [];
 			angular.forEach(data.sources, function(source) {
 				$http.get(source.url).success(function(sourceData) {
-					console.log(sourceData);
-
 					angular.forEach(sourceData, function(addon) {
 
 						for(var attributeName in source) {
@@ -47,14 +45,16 @@
 			viewModel.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
 		};
 
-		function openWebsite(url) {
-			//require("shell").openExternal(url);
+		viewModel.openWebsite = function(url) {
+			require("shell").openExternal(url);
 		};
 
 		viewModel.install = function(addon) {
 			var fs = require('fs');
 			var request = require('request');
 			var progress = require('request-progress');
+
+			const storage = require('electron-json-storage');
 
 			addon.isDownloading = true;
 
@@ -76,6 +76,25 @@
 			.on('end', function () {
 				console.log("download complete!");
 				addon.isDownloading = false;
+
+				storage.get("settings", function(error, data) {
+
+					if(!data.installedAddons) {
+						data.installedAddons = [];
+					}
+
+					var installedAddon = {
+						key : addon.file,
+						releaseVersion : addon.releaseVersion,
+						fileVersion : addon.fileVersion,
+					};
+
+					data.installedAddons.push(installedAddon);
+
+					storage.set("settings", data, function(error) {
+						console.log("installed-addon data saved!");
+					});
+				});
 			})
 			.pipe(fs.createWriteStream(filename));
 		}
