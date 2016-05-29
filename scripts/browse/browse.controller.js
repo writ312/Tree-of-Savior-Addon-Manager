@@ -83,6 +83,7 @@
 
 				$scope.$apply(function() {
 					addon.isDownloading = false;
+					addon.isInstalled = true;
 				});
 
 				storage.get("settings", function(error, data) {
