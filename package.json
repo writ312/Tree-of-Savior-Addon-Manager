@@ -1,27 +1,26 @@
 {
-  "name": "electron-quick-start",
+  "name": "tree-of-savior-addon-manager",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An addon manager for Tree of Savior.",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "git+https://github.com/Excrulon/Tree-of-Savior-Addon-Manager.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "tree of savior",
+    "addon",
+    "manager"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Excrulon",
+  "license": "GNUv3",
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/Excrulon/Tree-of-Savior-Addon-Manager#readme",
   "devDependencies": {
     "electron-prebuilt": "^0.35.0",
     "jasmine-core": "^2.4.1",
