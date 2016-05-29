@@ -12,16 +12,16 @@ Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Communit
 {
 	"sources" : [
 		{
-			"author" : "Excrulon",
-			"repo" : "Test-Addon",
-			"url" : "https://raw.githubusercontent.com/Excrulon/Test-Addon/master/addons.json",
-			"website" : "https://github.com/Excrulon/Tree-of-Savior-Lua-Mods"
+			"repo" : "Excrulon/Test-Addon"
 		},
 		{
-			"author" : "TehSeph",
-			"repo" : "tos-addons",
-			"url" : "https://raw.githubusercontent.com/TehSeph/tos-addons/master/addons.json",
-			"website" : "https://github.com/TehSeph/tos-addons"
+			"repo" : "TehSeph/tos-addons"
+		},
+		{
+			"repo" : "MizukiBelhi/ExtendedUI"
+		},
+		{
+			"repo" : "Miei/TOS-lua"
 		}
 	]
 }
@@ -36,7 +36,7 @@ Then, in your own repo where your addon lives, create an `addon.json` that descr
 		"file" : "experienceviewer",
 		"extension" : "ipf",
 		"fileVersion" : "v1.0.0",
-		"releaseVersion" : "v1.0.0",
+		"releaseTag" : "v1.0.0",
 		"unicode" : "⛄",
 		"description" : "Displays various experience values such as current experience, required experience, current percent, experience gained on last kill, kills til next level, experience per hour, and estimated time until level up.",
 		"tags" : [
@@ -49,7 +49,7 @@ Then, in your own repo where your addon lives, create an `addon.json` that descr
 		"file" : "mapfogviewer",
 		"extension" : "ipf",
 		"fileVersion" : "v1.0.0",
-		"releaseVersion" : "v1.0.0",
+		"releaseTag" : "v1.0.0",
 		"unicode" : "⛄",
 		"description" : "Displays the fog on the map as red tiles instead of the hard to see default fog. Makes exploration really easy!",
 		"tags" : [
