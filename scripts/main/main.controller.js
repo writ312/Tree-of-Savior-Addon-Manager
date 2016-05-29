@@ -50,6 +50,10 @@
 		};
 
 		viewModel.install = function(addon) {
+			var semver = require('semver');
+
+			console.log("ver: " + semver.gt('1.2.3', '9.8.7'));
+
 			var fs = require('fs');
 			var request = require('request');
 			var progress = require('request-progress');
