@@ -17,38 +17,74 @@
 
 		// definitely shouldn't be passing in scope here but I'll find another way later...
 		function install(addon, scope) {
-			var semver = require('semver');
-			console.log("ver: " + semver.gt('1.2.3', '9.8.7'));
-
-			var fs = require('fs');
-			var request = require('request');
-			var progress = require('request-progress');
-
 			const storage = require('electron-json-storage');
-
-			var filename = getAddonPath(addon);
+			var destinationFile = getAddonPath(addon);
 
 			addon.isDownloading = true;
 
-			console.log(addon.downloadUrl);
+			download(addon, destinationFile, scope, function() {
+				console.log("download complete!");
+			});
+		}
 
-			progress(request(addon.downloadUrl), {
-			}).on('response', function(response) {
+		function download(addon, destinationFile, scope, callback) {
+			var request = require('request');
+			var fileRequest = request.get(addon.downloadUrl);
+
+			fileRequest.on('response', function(response) {
 				$log.info(`status code: ${response.statusCode}`);
 				if(response.statusCode !== 200) {
-				}
-			}).on('progress', function (state) {
-				console.log(state);
-			}).on('error', function (err) {
-				console.log(err);
-			}).on('end', function () {
-				scope.$apply(function() {
-					addon.isDownloading = false;
-					addon.isInstalled = true;
-				});
+					scope.$apply(function() {
+						addon.isDownloading = false;
+						addon.isInstalled = false;
+						addon.failedInstall = true;
+					});
 
-				settings.addInstalledAddon(addon);
-			}).pipe(fs.createWriteStream(filename));
+					console.log("unlinking");
+
+					return;
+				} else {
+					var fs = require('fs');
+					var file = fs.createWriteStream(destinationFile);
+
+					fileRequest.on('error', function(error) {
+						scope.$apply(function() {
+							addon.isDownloading = false;
+							addon.failedInstall = true;
+							addon.isInstalled = false;
+						});
+						fs.unlink(destinationFile);
+
+						console.log("file request error");
+
+						return;
+					});
+
+					fileRequest.pipe(file);
+
+					file.on('finish', function() {
+						scope.$apply(function() {
+							addon.isDownloading = false;
+							addon.isInstalled = true;
+							addon.failedInstall = false;
+						});
+
+						file.close();
+						settings.addInstalledAddon(addon);
+					});
+
+					file.on('error', function(error) {
+						fs.unlink(destinationFile);
+						scope.$apply(function() {
+							addon.isDownloading = false;
+							addon.failedInstall = true;
+							addon.isInstalled = false;
+						});
+
+						return;
+					});
+				}
+			});
 		}
 
 		function uninstall(addon, scope) {

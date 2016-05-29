@@ -9,8 +9,7 @@
 						<md-chips data-ng-model="addon.tags" readonly="true">
 						</md-chips>
 						<p class="md-body-1">{{addon.description}}</p>
-						<p>Current Version: {{addon.fileVersion}}</p>
-						<p>Installed Version:</p>
+						<span data-ng-show="addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href="{{addon.website}}/issues">{{addon.author}}</a>.</p></span>
 					</md-card-title-text>
 					<md-card-title-media>
 						<div class="md-media-lg card-media"></div>
@@ -18,8 +17,8 @@
 				</md-card-title>
 				<md-card-actions layout="row" layout-align="end center">
 					<md-button data-ng-click="browseController.openWebsite(addon.website)" class="md-raised">Website</md-button>
-					<md-button data-ng-click="browseController.install(addon)" class="md-raised" data-ng-class="{'md-warn': true}" data-ng-show="!addon.isDownloading && !addon.isInstalled">Install</md-button>
-					<md-button data-ng-click="browseController.uninstall(addon)" class="md-raised" data-ng-show="addon.isInstalled">Uninstall</md-button>
+					<md-button data-ng-click="browseController.install(addon)" class="md-raised" data-ng-class="{'md-warn': addon.failedInstall}" data-ng-show="!addon.isDownloading && !addon.isInstalled">Install</md-button>
+					<md-button data-ng-click="browseController.uninstall(addon)" class="md-raised" data-ng-show="addon.isInstalled && !addon.failedInstall">Uninstall</md-button>
 					<md-progress-circular md-mode="indeterminate" data-ng-show="addon.isDownloading"></md-progress-circular>
 				</md-card-actions>
 			</md-card>
