@@ -16,13 +16,14 @@
 		return service;
 
 		// definitely shouldn't be passing in scope here but I'll find another way later...
-		function install(addon, scope) {
+		function install(addon, scope, callback) {
 			const storage = require('electron-json-storage');
 			getAddonPath(addon, function(destinationFile) {
 				addon.isDownloading = true;
 
 				download(addon, destinationFile, scope, function() {
 					$log.info("Downloading " + addon.name + " to " + destinationFile + " complete.");
+					return callback();
 				});
 			});
 		}
@@ -67,6 +68,7 @@
 
 						file.close();
 						settings.addInstalledAddon(addon);
+						callback();
 					});
 
 					file.on('error', function(error) {

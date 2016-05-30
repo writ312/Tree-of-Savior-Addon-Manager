@@ -1,0 +1,21 @@
+<md-card>
+	<md-card-title>
+		<md-card-title-text>
+			<span class="md-headline">{{vm.addon.name}}</span>
+			<span class="md-subhead">{{vm.addon.author}}</span>
+			<md-chips data-ng-model="vm.addon.tags" readonly="true">
+			</md-chips>
+			<p class="md-body-1">{{vm.addon.description}}</p>
+			<span data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href="{{vm.addon.website}}/issues">{{vm.addon.author}}</a>.</p></span>
+		</md-card-title-text>
+		<md-card-title-media>
+			<div class="md-media-lg card-media"></div>
+		</md-card-title-media>
+	</md-card-title>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-button data-ng-click="openWebsite(vm.addon);" class="md-raised">Website</md-button>
+		<md-button data-ng-click="install(vm.addon);" class="md-raised" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">Install</md-button>
+		<md-button data-ng-click="uninstall(vm.addon);" class="md-raised" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">Uninstall</md-button>
+		<md-progress-circular md-mode="indeterminate" data-ng-show="vm.addon.isDownloading"></md-progress-circular>
+	</md-card-actions>
+</md-card>

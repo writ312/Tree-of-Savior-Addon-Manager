@@ -7,7 +7,6 @@
 
 	BrowseController.$inject = ['$scope', '$http', 'installer', '$log'];
 
-	/* @ngInject */
 	function BrowseController($scope, $http, installer, $log) {
 		var viewModel = this;
 
@@ -43,17 +42,5 @@
 
 			viewModel.addons = addons;
 		});
-
-		viewModel.openWebsite = function(url) {
-			require("shell").openExternal(url);
-		};
-
-		viewModel.install = function(addon) {
-			installer.install(addon, $scope);
-		}
-
-		viewModel.uninstall = function(addon) {
-			installer.uninstall(addon, $scope);
-		}
 	}
 })();
