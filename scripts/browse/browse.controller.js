@@ -43,6 +43,8 @@
 								addon.isInstalled = true;
 								var semver = require('semver');
 
+								addon.installedFileVersion = installedAddon.fileVersion;
+
 								$log.info("Update available for " + addon.name + "? " + semver.gt(addon.fileVersion, installedAddon.fileVersion));
 
 								if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
