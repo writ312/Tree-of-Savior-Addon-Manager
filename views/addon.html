@@ -16,6 +16,7 @@
 	<md-card-actions layout="row" layout-align="end center">
 		<md-button data-ng-click="openWebsite(vm.addon);" class="md-raised">Website</md-button>
 		<md-button data-ng-click="install(vm.addon);" class="md-raised" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">Install</md-button>
+		<md-button data-ng-click="update(vm.addon);" class="md-raised md-accent" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled">Update</md-button>
 		<md-button data-ng-click="uninstall(vm.addon);" class="md-raised" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">Uninstall</md-button>
 		<md-progress-circular md-mode="indeterminate" data-ng-show="vm.addon.isDownloading"></md-progress-circular>
 	</md-card-actions>

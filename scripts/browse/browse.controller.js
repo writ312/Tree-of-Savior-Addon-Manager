@@ -19,7 +19,7 @@
 				var addons = [];
 				angular.forEach(data.sources, function(source) {
 					var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
-					
+
 					$http.get(repo + "?" + new Date().toString()).success(function(sourceData) {
 						angular.forEach(sourceData, function(addon) {
 
@@ -47,7 +47,11 @@
 
 								if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
 									addon.isUpdateAvailable = true;
-								}
+								} else {
+								   addon.isUpdateAvailable = false;
+							   }
+							} else {
+								addon.isUpdateAvailable = false;
 							}
 
 							addons.push(addon);
