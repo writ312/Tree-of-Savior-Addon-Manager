@@ -17,6 +17,10 @@
 			return settings.getIsValidDirectory();
 		};
 
+		vm.launchGame = function() {
+			require("shell").openExternal("steam://rungameid/372000");
+		};
+
 		$scope.$watch('vm.selectedIndex', function(current, old) {
 			switch(current) {
 				case 0:
