@@ -120,6 +120,12 @@
 			});
 		}
 
+		function update(addon, scope) {
+			/*
+			
+			*/
+		}
+
 		function getAddonPath(addon, callback) {
 			settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "\\data\\";

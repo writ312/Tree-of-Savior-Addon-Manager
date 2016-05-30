@@ -7,7 +7,7 @@
         'ngMaterial',
         'ngAnimate'
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 			$urlRouterProvider.otherwise("/tab");
 
 			$stateProvider
@@ -31,6 +31,11 @@
 					templateUrl: 'views/installed.html',
 					controller: 'InstalledController as vm'
 				});
+
+			$mdThemingProvider.theme('default')
+				.primaryPalette('blue')
+				.accentPalette('light-green')
+				.warnPalette('red');
         }
     ]);
 })();
