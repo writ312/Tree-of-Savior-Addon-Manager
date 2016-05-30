@@ -7,6 +7,7 @@
 			</md-chips>
 			<p class="md-body-1">{{vm.addon.description}}</p>
 			<span data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href="{{vm.addon.website}}/issues">{{vm.addon.author}}</a>.</p></span>
+			<span data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></span>
 		</md-card-title-text>
 		<md-card-title-media>
 			<div class="md-media-lg card-media"></div>

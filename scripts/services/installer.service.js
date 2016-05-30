@@ -96,12 +96,19 @@
 							fs.exists(filename, function(exists) {
 								if(exists) {
 									$log.info("Removing " + filename);
-									fs.unlink(filename);
-									settings.removeInstalledAddon(addon);
+									fs.unlink(filename, function(error) {
+										if(error) {
+											$log.error("Could not remove " + filename + ". Is the game open?");
+											addon.uninstallError = true;
+										} else {
+											addon.uninstallError = false;
+											settings.removeInstalledAddon(addon);
 
-									scope.$apply(function() {
-										addon.isDownloading = false;
-										addon.isInstalled = false;
+											scope.$apply(function() {
+												addon.isDownloading = false;
+												addon.isInstalled = false;
+											});
+										}
 									});
 								} else {
 									$log.error(filename + " does not exist so cannot remove it.");
