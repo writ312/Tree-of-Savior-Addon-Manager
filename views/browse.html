@@ -1,7 +1,15 @@
-<md-content class="md-padding" ng-scrollbars>
+<div layout="column">
+	<md-input-container class="md-block">
+		<label>Search</label>
+		<md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+		<input ng-model="browseController.searchQuery" type="text">
+	</md-input-container>
+</div>
+
+<md-content class="md-padding">
 	<md-content class="md-padding" layout-xs="column" layout="row">
 		<div flex layout="column">
-			<md-card data-ng-repeat="addon in browseController.addons" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+			<md-card data-ng-repeat="addon in browseController.addons | filter:browseController.searchQuery" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
 				<md-card-title>
 					<md-card-title-text>
 						<span class="md-headline">{{addon.name}}</span>
