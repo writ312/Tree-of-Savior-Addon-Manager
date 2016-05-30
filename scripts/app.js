@@ -14,7 +14,7 @@
 				.state('settings', {
 					url: '/settings',
 					templateUrl: 'views/settings.html',
-					controller: 'SettingsController as settingsController'
+					controller: 'SettingsController as vm'
 				})
 				.state('featured', {
 					url: '/featured',

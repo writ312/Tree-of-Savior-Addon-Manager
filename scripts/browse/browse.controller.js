@@ -11,9 +11,6 @@
 	function BrowseController($scope, $http, installer, $log) {
 		var viewModel = this;
 
-		viewModel.browseForDirectory = browseForDirectory;
-		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
-
 		var masterSources = "https://raw.githubusercontent.com/Tree-of-Savior-Addon-Community/Addons/master/addons.json";
 
 		$http.get(masterSources).success(function(data) {
@@ -46,16 +43,6 @@
 
 			viewModel.addons = addons;
 		});
-
-		function browseForDirectory() {
-			var fs = require('fs');
-			var modDirectory = viewModel.treeOfSaviorDirectory + "mods";
-			fs.mkdir(viewModel.treeOfSaviorDirectory + "mods");
-
-			var remote = require('remote');
-			var dialog = remote.require('dialog');
-			viewModel.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
-		};
 
 		viewModel.openWebsite = function(url) {
 			require("shell").openExternal(url);

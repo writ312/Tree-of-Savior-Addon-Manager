@@ -9,18 +9,25 @@
 
 	function settings($log) {
 		const storage = require('electron-json-storage');
+		const addonsFile = "addons";
 		const settingsFile = "settings";
+
+		var isValidDirectory = false;
 
 		var service = {
 			addInstalledAddon : addInstalledAddon,
 			removeInstalledAddon : removeInstalledAddon,
-			getInstalledAddons : getInstalledAddons
+			getInstalledAddons : getInstalledAddons,
+			getTreeOfSaviorDirectory : getTreeOfSaviorDirectory,
+			saveTreeOfSaviorDirectory : saveTreeOfSaviorDirectory,
+			getIsValidDirectory : getIsValidDirectory,
+			setIsValidDirectory : setIsValidDirectory
 		};
 
 		return service;
 
 		function addInstalledAddon(addon) {
-			storage.get(settingsFile, function(error, data) {
+			storage.get(addonsFile, function(error, data) {
 				if(!data.installedAddons) {
 					data.installedAddons = {};
 				}
@@ -33,7 +40,7 @@
 		}
 
 		function removeInstalledAddon(addon) {
-			storage.get(settingsFile, function(error, data) {
+			storage.get(addonsFile, function(error, data) {
 				if(error) {
 					$log.error("Could not remove installed addon: " + error + " " + data);
 				} else if(data.installedAddons[addon.file]) {
@@ -47,7 +54,7 @@
 		}
 
 		function getInstalledAddons(callback) {
-			return storage.get(settingsFile, function(error, data) {
+			return storage.get(addonsFile, function(error, data) {
 				if(error) {
 					$log.error("Could not get installed addons: " + error);
 				} else {
@@ -57,13 +64,45 @@
 		}
 
 		function saveInstalledAddons(data) {
-			storage.set(settingsFile, data, function(error) {
+			storage.set(addonsFile, data, function(error) {
 				if(error) {
 					$log.error(error + ": " + data);
 				} else {
 					$log.info("Wrote installed addon to settings: " + data);
 				}
 			});
+		}
+
+		function getTreeOfSaviorDirectory(callback) {
+			return storage.get(settingsFile, function(error, data) {
+				if(error) {
+					$log.error("Could not get tree of savior directory: " + error);
+				} else {
+					return callback(data.treeOfSaviorDirectory);
+				}
+			});
+		}
+
+		function saveTreeOfSaviorDirectory(treeOfSaviorDirectory) {
+			var settings = {
+				treeOfSaviorDirectory : treeOfSaviorDirectory
+			};
+
+			storage.set(settingsFile, settings, function(error) {
+				if(error) {
+					$log.error("Could not save Tree of Savior directory: " + error + " " + settings);
+				} else {
+					$log.info("Wrote installed addon to settings: " + settings);
+				}
+			});
+		}
+
+		function getIsValidDirectory() {
+			return isValidDirectory;
+		}
+
+		function setIsValidDirectory(isValid) {
+			isValidDirectory = isValid;
 		}
 	}
 })();

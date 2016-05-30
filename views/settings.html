@@ -6,10 +6,11 @@
 			<div layout-gt-sm="row">
 				<md-input-container class="md-block" flex-gt-sm>
 					<label>Tree of Savior Directory</label>
-					<input ng-model="settingsController.treeOfSaviorDirectory">
-					<md-button class="md-raised" ng-click="settingsController.browseForDirectory();">Browse...</md-button>
+					<input ng-model="vm.treeOfSaviorDirectory" ng-change="vm.updateDirectory();">
+					<md-button class="md-raised" ng-click="vm.browseForDirectory();">Browse...</md-button>
 				</md-input-container>
 			</div>
+			<span data-ng-show="!vm.isValidDirectory();"><p class="error">Invalid Tree of Savior directory.</p></span>
 		</form>
 	</md-content>
 </md-content>

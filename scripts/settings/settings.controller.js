@@ -1,27 +1,49 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('app')
-        .controller('SettingsController', SettingsController);
+	angular
+		.module('app')
+		.controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = [];
+	SettingsController.$inject = ['settings'];
 
-    /* @ngInject */
-    function SettingsController() {
-        var viewModel = this;
+	/* @ngInject */
+	function SettingsController(settings) {
+		var vm = this;
 
-		viewModel.browseForDirectory = browseForDirectory;
-		viewModel.treeOfSaviorDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TreeOfSavior\\";
+		settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+			vm.treeOfSaviorDirectory = treeOfSaviorDirectory;
+			validateDirectory();
+		});
 
-		function browseForDirectory() {
-			var fs = require('fs');
-			var modDirectory = viewModel.treeOfSaviorDirectory + "mods";
-			fs.mkdir(viewModel.treeOfSaviorDirectory + "mods");
-
+		vm.browseForDirectory = function() {
 			var remote = require('remote');
 			var dialog = remote.require('dialog');
-			viewModel.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
+			vm.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
+			settings.saveTreeOfSaviorDirectory(vm.treeOfSaviorDirectory);
+			validateDirectory();
 		};
-    }
+
+		vm.updateDirectory = function() {
+			settings.saveTreeOfSaviorDirectory(vm.treeOfSaviorDirectory);
+			validateDirectory();
+		}
+
+		vm.isValidDirectory = function() {
+			return settings.getIsValidDirectory();
+		};
+
+		function validateDirectory() {
+			var fs = require("fs");
+			var exe = vm.treeOfSaviorDirectory + "\\release\\Client_tos.exe";
+
+			fs.stat(exe, function(error, stat) {
+				if(error == null) {
+					settings.setIsValidDirectory(true);
+				} else {
+					settings.setIsValidDirectory(false);
+				}
+			});
+		}
+	}
 })();

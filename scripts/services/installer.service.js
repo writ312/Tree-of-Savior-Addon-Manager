@@ -18,12 +18,12 @@
 		// definitely shouldn't be passing in scope here but I'll find another way later...
 		function install(addon, scope) {
 			const storage = require('electron-json-storage');
-			var destinationFile = getAddonPath(addon);
+			getAddonPath(addon, function(destinationFile) {
+				addon.isDownloading = true;
 
-			addon.isDownloading = true;
-
-			download(addon, destinationFile, scope, function() {
-				console.log("download complete!");
+				download(addon, destinationFile, scope, function() {
+					$log.info("Downloading " + addon.name + " to " + destinationFile + " complete.");
+				});
 			});
 		}
 
@@ -90,35 +90,36 @@
 
 					if(installedAddon) {
 						var fs = require('fs');
-						var filename = getAddonPath(installedAddon);
+						getAddonPath(installedAddon, function(filename) {
+							fs.exists(filename, function(exists) {
+								if(exists) {
+									$log.info("Removing " + filename);
+									fs.unlink(filename);
+									settings.removeInstalledAddon(addon);
 
-						fs.exists(filename, function(exists) {
-							if(exists) {
-								$log.info("Removing " + filename);
-								fs.unlink(filename);
-								settings.removeInstalledAddon(addon);
-
-								scope.$apply(function() {
-									addon.isDownloading = false;
-									addon.isInstalled = false;
-								});
-							} else {
-								$log.error(filename + " does not exist so cannot remove it.");
-							}
+									scope.$apply(function() {
+										addon.isDownloading = false;
+										addon.isInstalled = false;
+									});
+								} else {
+									$log.error(filename + " does not exist so cannot remove it.");
+								}
+							});
 						});
 					}
 				}
 			});
 		}
 
-		function getAddonPath(addon) {
-			var treeOfSaviorDirectory = "C:/Program Files (x86)/Steam/SteamApps/common/TreeOfSavior/addons/";
-			var addonDirectory = treeOfSaviorDirectory + "mods/";
-			var filename = addonDirectory + "_" + addon.file + "-" + addon.unicode + "-" + addon.fileVersion + "." + addon.extension;
+		function getAddonPath(addon, callback) {
+			settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "\\data\\";
+				var filename = treeOfSaviorDataDirectory + "_" + addon.file + "-" + addon.unicode + "-" + addon.fileVersion + "." + addon.extension;
 
-			$log.info("getAddonPath: " + filename);
+				$log.info("getAddonPath: " + filename);
 
-			return filename;
+				return callback(filename);
+			});
 		}
 	}
 })();

@@ -5,13 +5,17 @@
 		.module('app')
 		.controller('TabController', TabController);
 
-	TabController.$inject = ['$scope', '$location'];
+	TabController.$inject = ['$scope', '$location', 'settings'];
 
 	/* @ngInject */
-	function TabController($scope, $location) {
+	function TabController($scope, $location, settings) {
 		var vm = this;
 
 		vm.selectedIndex = 0;
+
+		vm.isValidDirectory = function() {
+			return settings.getIsValidDirectory();
+		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {
 			switch(current) {
