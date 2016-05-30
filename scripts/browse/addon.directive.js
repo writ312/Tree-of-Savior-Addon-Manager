@@ -37,6 +37,11 @@
 				var repoUrl = "https://github.com/" + addon.repo;
 				require("shell").openExternal(repoUrl);
 			}
+
+			scope.openIssues = function(addon) {
+				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
+				require("shell").openExternal(issuesUrl);
+			}
 		}
 	}
 
