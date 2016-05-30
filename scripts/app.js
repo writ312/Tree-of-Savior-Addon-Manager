@@ -29,7 +29,7 @@
 				.state('installed', {
 					url: '/installed',
 					templateUrl: 'views/installed.html',
-					controller: 'InstalledController as installedController'
+					controller: 'InstalledController as vm'
 				});
         }
     ]);

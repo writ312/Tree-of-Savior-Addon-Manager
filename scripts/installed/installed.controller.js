@@ -5,9 +5,13 @@
 		.module('app')
 		.controller('InstalledController', InstalledController);
 
-	InstalledController.$inject = [];
+	InstalledController.$inject = ['settings'];
 
-	/* @ngInject */
-	function InstalledController() {
+	function InstalledController(settings) {
+		var vm = this;
+
+		settings.getInstalledAddons(function(installedAddons) {
+			vm.installedAddons = installedAddons;
+		});
 	}
 })();
