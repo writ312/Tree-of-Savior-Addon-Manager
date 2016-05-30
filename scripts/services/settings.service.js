@@ -68,7 +68,7 @@
 				if(error) {
 					$log.error(error + ": " + data);
 				} else {
-					$log.info("Wrote installed addon to settings: " + JSON.stringify(data));
+					$log.info("Wrote installed addon to settings: " + addonsFile);
 				}
 			});
 		}
