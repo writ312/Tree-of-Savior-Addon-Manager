@@ -32,6 +32,10 @@
 				installer.uninstall(addon, scope);
 			}
 
+			scope.update = function(addon) {
+				installer.update(addon, scope);
+			}
+
 			scope.openWebsite = function(addon) {
 				// TODO: this needs to be a utility method
 				var repoUrl = "https://github.com/" + addon.repo;

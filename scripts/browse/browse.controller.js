@@ -37,23 +37,26 @@
 							addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
 							addon.isDownloading = false;
 
+							if(installedAddons) {
+
 							var installedAddon = installedAddons[addon.file];
+								if(installedAddon) {
+									addon.installedAddon = installedAddon;
+									addon.isInstalled = true;
+									var semver = require('semver');
 
-							if(installedAddon) {
-								addon.isInstalled = true;
-								var semver = require('semver');
+									addon.installedFileVersion = installedAddon.fileVersion;
 
-								addon.installedFileVersion = installedAddon.fileVersion;
+									$log.info("Update available for " + addon.name + "? " + semver.gt(addon.fileVersion, installedAddon.fileVersion));
 
-								$log.info("Update available for " + addon.name + "? " + semver.gt(addon.fileVersion, installedAddon.fileVersion));
-
-								if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
-									addon.isUpdateAvailable = true;
+									if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
+										addon.isUpdateAvailable = true;
+									} else {
+									   addon.isUpdateAvailable = false;
+								   }
 								} else {
-								   addon.isUpdateAvailable = false;
-							   }
-							} else {
-								addon.isUpdateAvailable = false;
+									addon.isUpdateAvailable = false;
+								}
 							}
 
 							addons.push(addon);

@@ -10,7 +10,8 @@
 	function installer($log, settings) {
 		var service = {
 			install: install,
-			uninstall: uninstall
+			uninstall: uninstall,
+			update: update
 		};
 
 		return service;
@@ -23,7 +24,10 @@
 
 				download(addon, destinationFile, scope, function() {
 					$log.info("Downloading " + addon.name + " to " + destinationFile + " complete.");
-					return callback();
+
+					if(callback) {
+						return callback();
+					}
 				});
 			});
 		}
@@ -64,11 +68,16 @@
 							addon.isDownloading = false;
 							addon.isInstalled = true;
 							addon.failedInstall = false;
+							addon.isUpdateAvailable = false;
+							addon.installedFileVersion = addon.fileVersion;
 						});
 
 						file.close();
 						settings.addInstalledAddon(addon);
-						callback();
+
+						if(callback) {
+							return callback();
+						}
 					});
 
 					file.on('error', function(error) {
@@ -85,7 +94,7 @@
 			});
 		}
 
-		function uninstall(addon, scope) {
+		function uninstall(addon, scope, callback) {
 			settings.getInstalledAddons(function(installedAddons) {
 				if(installedAddons) {
 					var installedAddon = installedAddons[addon.file];
@@ -100,6 +109,10 @@
 										if(error) {
 											$log.error("Could not remove " + filename + ". Is the game open?");
 											addon.uninstallError = true;
+
+											if(callback) {
+												return callback(false);
+											}
 										} else {
 											addon.uninstallError = false;
 											settings.removeInstalledAddon(addon);
@@ -108,6 +121,10 @@
 												addon.isDownloading = false;
 												addon.isInstalled = false;
 											});
+
+											if(callback) {
+												return callback(true);
+											}
 										}
 									});
 								} else {
@@ -121,9 +138,19 @@
 		}
 
 		function update(addon, scope) {
-			/*
-			
-			*/
+			$log.info(`Updating ${addon.installedAddon.file}-${addon.installedAddon.fileVersion} to ${addon.file}-${addon.fileVersion}.`);
+
+			uninstall(addon.installedAddon, scope, function(isUninstallSuccessful) {
+				if(isUninstallSuccessful) {
+					$log.info(`Uninstalled ${addon.installedAddon.file}-${addon.installedAddon.fileVersion}.`);
+
+					install(addon, scope, function(isInstallSuccessful) {
+						if(isInstallSuccessful) {
+							$log.info(`Installed ${addon.file}-${addon.fileVersion}.`);
+						}
+					});
+				}
+			})
 		}
 
 		function getAddonPath(addon, callback) {
