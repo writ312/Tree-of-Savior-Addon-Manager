@@ -64,7 +64,7 @@ Then, in your own repo where your addon lives, create an `addon.json` that descr
 
 `name`: The name of your addon. This can be anything you want.
 
-`releaseVersion`: The tag name of your release.
+`releaseTag`: The tag name of your release.
 
 `file`: The filename of your addon in the release, minus the extension. This should never change once submitted.
 
