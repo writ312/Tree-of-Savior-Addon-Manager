@@ -28,15 +28,11 @@
 					break;
 
 				case 1:
-					$location.url('/featured');
-					break;
-
-				case 2:
 					$location.url('/browse');
 					break;
 
-				case 3:
-					$location.url('/installed');
+				case 2:
+					$location.url('/featured');
 					break;
 			}
 		});

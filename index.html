@@ -14,9 +14,8 @@
 				<div class="content">
 					<md-tabs md-stretch-tabs md-selected="vm.selectedIndex">
 						<md-tab label="Settings"></md-tab>
-						<md-tab label="Featured" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="Browse" ng-disabled="!vm.isValidDirectory();"></md-tab>
-						<md-tab label="Installed" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="Featured" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
 
 					<div id="content" ui-view flex></div>
