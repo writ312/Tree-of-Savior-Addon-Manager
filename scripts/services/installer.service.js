@@ -5,9 +5,9 @@
 		.module('app')
 		.factory('installer', installer);
 
-	installer.$inject = ['$log', 'settings'];
+	installer.$inject = ['$log', 'settings', 'addonretriever'];
 
-	function installer($log, settings) {
+	function installer($log, settings, addonretriever) {
 		var service = {
 			install: install,
 			uninstall: uninstall,
@@ -25,10 +25,12 @@
 				download(addon, destinationFile, scope, function() {
 					$log.info("Downloading " + addon.name + " to " + destinationFile + " complete.");
 
-					createSettingsFolder(addon, function(success) {
-						if(callback) {
-							return callback();
-						}
+					installDependencies(addon, function(success) {
+						createSettingsFolder(addon, function(success) {
+							if(callback) {
+								return callback(success);
+							}
+						});
 					});
 				});
 			});
@@ -49,6 +51,52 @@
 					}
 				});
 			})
+		}
+
+		function installDependencies(addon, callback) {
+			addonretriever.getDependencies(function(dependencies) {
+				settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+
+					angular.forEach(dependencies, function(dependency) {
+						$log.info(`Downloading dependency at ${dependency.url}.`);
+
+						var request = require('request');
+						var fileRequest = request.get(dependency.url);
+						var filename = dependency.url.match(/.*\/(.*)$/)[1];
+						var destinationFile = `${treeOfSaviorDirectory}\\release\\lua\\${filename}`;
+
+						fileRequest.on('response', function(response) {
+							if(response.statusCode !== 200) {
+								return;
+							} else {
+								var fs = require('fs');
+								var file = fs.createWriteStream(destinationFile);
+
+								fileRequest.on('error', function(error) {
+									$log.error(`fileRequest: Could not install dependency from ${dependency.url}: ${error}`);
+									return;
+								});
+
+								fileRequest.pipe(file);
+
+								file.on('finish', function() {
+									file.close();
+								});
+
+								file.on('error', function(error) {
+									$log.error(`file: Could not install dependency from ${dependency.url}: ${error}`);
+									fs.unlink(destinationFile);
+									return;
+								});
+							}
+						});
+					});
+
+					if(callback) {
+						return callback(true);
+					}
+				});
+			});
 		}
 
 		function download(addon, destinationFile, scope, callback) {
