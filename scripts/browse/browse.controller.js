@@ -38,8 +38,8 @@
 							addon.isDownloading = false;
 
 							if(installedAddons) {
+								var installedAddon = installedAddons[addon.file];
 
-							var installedAddon = installedAddons[addon.file];
 								if(installedAddon) {
 									addon.installedAddon = installedAddon;
 									addon.isInstalled = true;
@@ -55,6 +55,7 @@
 									   addon.isUpdateAvailable = false;
 								   }
 								} else {
+									addon.isInstalled = false;
 									addon.isUpdateAvailable = false;
 								}
 							}

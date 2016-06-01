@@ -1,16 +1,17 @@
-<div layout="column" ng-cloak>
-	<md-content layout-padding>
-		<md-input-container class="md-block">
-			<label>Search</label>
-			<input data-ng-model="browseController.searchQuery">
+<div layout="column" layout-padding>
+	<md-input-container class="md-block">
+		<label>Search</label>
+		<input data-ng-model="browseController.searchQuery">
+	</md-input-container>
+	<div layout="row">
+		<md-input-container>
+			<md-checkbox ng-model="browseController.isInstalled" aria-label="Is installed?">Is installed?</md-checkbox>
 		</md-input-container>
-	</md-content>
-</div>
-
-<div layout="column">
-	<div flex>
-		<div data-ng-repeat="addon in browseController.addons | filter:browseController.searchQuery">
-			<addon addon="addon"></addon>
-		</div>
+		<md-input-container>
+			<md-checkbox ng-model="browseController.isUpdateAvailable" aria-label="Is update available?">Is update available?</md-checkbox>
+		</md-input-container>
+	</div>
+	<div data-ng-repeat="addon in browseController.addons | orderBy:'name' | filter:{ name : browseController.searchQuery, isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled }">
+		<addon addon="addon"></addon>
 	</div>
 </div>
