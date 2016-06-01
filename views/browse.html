@@ -1,19 +1,16 @@
-
-
-<div layout="column">
-	<md-input-container class="md-block">
-		<label>Search</label>
-		<md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-		<input ng-model="browseController.searchQuery" type="text">
-	</md-input-container>
+<div layout="column" ng-cloak>
+	<md-content layout-padding>
+		<md-input-container class="md-block">
+			<label>Search</label>
+			<input data-ng-model="browseController.searchQuery">
+		</md-input-container>
+	</md-content>
 </div>
 
-<md-content class="md-padding">
-	<md-content class="md-padding" layout-xs="column" layout="row">
-		<div flex layout="column">
-			<div data-ng-repeat="addon in browseController.addons | filter:browseController.searchQuery">
-				<addon addon="addon"></addon>
-			</div>
+<div layout="column">
+	<div flex>
+		<div data-ng-repeat="addon in browseController.addons | filter:browseController.searchQuery">
+			<addon addon="addon"></addon>
 		</div>
-	</md-content>
-</md-content>
+	</div>
+</div>
