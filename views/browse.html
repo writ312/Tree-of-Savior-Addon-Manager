@@ -11,7 +11,7 @@
 			<md-checkbox ng-model="browseController.isUpdateAvailable" aria-label="Is update available?">Is update available?</md-checkbox>
 		</md-input-container>
 	</div>
-	<div data-ng-repeat="addon in browseController.addons | orderBy:'name' | filter:{ name : browseController.searchQuery, isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled }">
+	<div data-ng-repeat="addon in browseController.addons | orderBy:'name' | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
 		<addon addon="addon"></addon>
 	</div>
 </div>
