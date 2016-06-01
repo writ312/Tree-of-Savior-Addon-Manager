@@ -25,11 +25,30 @@
 				download(addon, destinationFile, scope, function() {
 					$log.info("Downloading " + addon.name + " to " + destinationFile + " complete.");
 
-					if(callback) {
-						return callback();
-					}
+					createSettingsFolder(addon, function(success) {
+						if(callback) {
+							return callback();
+						}
+					});
 				});
 			});
+		}
+
+		function createSettingsFolder(addon, callback) {
+			settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
+				var mkdirp = require('mkdirp');
+				var directoryName = `${treeOfSaviorDirectory}\\addons\\${addon.file}`;
+
+				mkdirp(directoryName, function (error) {
+					if (error) {
+						$log.error(`Failed to create settings folder for ${addon.name}: ${error}.`);
+						return callback(false);
+					} else {
+						$log.info(`Created addon directory for settings: ${directoryName}.`);
+						return callback(true);
+					}
+				});
+			})
 		}
 
 		function download(addon, destinationFile, scope, callback) {
