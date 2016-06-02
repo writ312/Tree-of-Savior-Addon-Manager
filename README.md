@@ -20,6 +20,10 @@ This is an app made using [Electron](http://electron.atom.io/) which basically b
 
 Make sure to delete `SumAni.ipf` from the `data` folder. This has an addon inside it that's responsible for creating that button. If you are using @fiote's addons, you'll still need it to load his until he finishes converting his addons.
 
+* The `Launch Tree of Savior` button doesn't work.
+
+This button only works for the Steam version of Tree of Savior. If you're using another version, just launch the game how you always have.
+
 * Starting over
 
 If things ever get out of sync from some reason, you can find settings and addon cache in `%AppData%\Tree of Savior Addon Manager`. Open the run prompt or Windows Explorer and type that path in to open it.
