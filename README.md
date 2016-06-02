@@ -4,7 +4,7 @@ Tree of Savior Addon Manager is an application that allows you to easily find an
 
 ![Tree of Savior Experience Viewer](http://i.imgur.com/rzMR83k.png)
 
-# Submitting
+# Submitting Addons
 
 Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
 
@@ -66,14 +66,20 @@ Then, in your own repo where your addon lives, create an `addon.json` that descr
 
 `releaseTag`: The tag name of your release.
 
+`fileVersion`: The version of your addon. All `fileVersion`s need to follow [semantic versions](http://semver.org/) in order for updates to be processed properly.
+
 `file`: The filename of your addon in the release, minus the extension. This should never change once submitted.
 
 `extension`: The extension of your addon in the release. For now, only `ipf` is supported.
-
-`fileVersion`: The version of your addon. All `fileVersion`s need to follow [semantic versions](http://semver.org/) in order for updates to be processed properly.
 
 `unicode`: The unicode character you want to use in your downloaded addon filename.
 
 `description`: A detailed description of your addon.
 
 `tags`: A list of keywords that describes what your addon is for searching.
+
+# Donate
+
+Not required by any means, but feel free to donate if you want!
+
+[Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6JBF88ZAUCD34)
