@@ -4,6 +4,10 @@ Tree of Savior Addon Manager is an application that allows you to easily find an
 
 ![Tree of Savior Experience Viewer](http://i.imgur.com/rzMR83k.png)
 
+# Download / Install
+
+Grab the [latest release](https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
+
 # Submitting Addons
 
 Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
