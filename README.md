@@ -6,7 +6,7 @@ Tree of Savior Addon Manager is an application that allows you to easily find an
 
 # Download / Install
 
-If you have previous addons installed from before using this, it's best to delete them all and start from scratch using this app. This includes the `addons` folder and all of the previous ipfs (including `SumAni.ipf`!). No more loaders needed.
+If you have previous addons installed from before using this, it's best to delete them all and start from scratch using this app. This includes the `addons` folder and all of the previous ipfs (including `SumAni.ipf`!). No more loaders needed. If you are still using @fiote's addons, you'll still need the old `SumAni.ipf` as it's a dependency for it and those aren't finished being converted yet.
 
 Grab the [latest release](https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
 
