@@ -10,6 +10,22 @@ If you have previous addons installed from before using this, it's best to delet
 
 Grab the [latest release](https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
 
+# FAQ
+
+* Why is the size of the manager so large?
+
+This is an app made using [Electron](http://electron.atom.io/) which basically bundles [Chromium](https://www.chromium.org/Home) (the base of Chrome). Due to that, the size is bloated a little bit.
+
+* After deleting the `addons` folder, an `Addon Loader` button is stuck on my screen. What do I do?
+
+Make sure to delete `SumAni.ipf` from the `data` folder. This has an addon inside it that's responsible for creating that button. If you are using @fiote's addons, you'll still need it to load his until he finishes converting his addons.
+
+* Starting over
+
+If things ever get out of sync from some reason, you can find settings and addon cache in `%AppData%\Tree of Savior Addon Manager`. Open the run prompt or Windows Explorer and type that path in to open it.
+
+There are two files here named `settings.json` and `addons.json`. `settings.json` is responsible for saving your Tree of Savior directory location. `addons.json` is responsible for keeping track of the addons you have installed. If something goes wrong and things get out of sync, either manually make the changes in this file or delete that file and the installed ipfs manually and start over. Hopefully you won't really have to do this.
+
 # Submitting Addons
 
 Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
