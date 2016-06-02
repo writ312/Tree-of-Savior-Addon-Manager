@@ -23,7 +23,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 800, height: 600, icon: 'resources/tos-exp.png'});
+	mainWindow = new BrowserWindow({width: 800, height: 600, icon: 'resources/tos-exp.ico'});
 
 	mainWindow.setMenuBarVisibility(false);
 
@@ -33,7 +33,7 @@ app.on('ready', function() {
 	mainWindow.loadURL(`file://${__dirname}/index.html`);
 
 	// Open the DevTools.
-	mainWindow.webContents.openDevTools();
+	//mainWindow.webContents.openDevTools();
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function() {
