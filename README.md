@@ -10,6 +10,16 @@ If you have previous addons installed from before using this, it's best to delet
 
 Grab the [latest release](https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
 
+# FAQ
+
+* Why is the size of the manager so large?
+
+This is an app made using [Electron](http://electron.atom.io/) which basically bundles [Chromium](https://www.chromium.org/Home) (the base of Chrome). Due to that, the size is bloated a little bit.
+
+* After deleting the `addons` folder An `Addon Loader` button is stuck on my screen. What do I do?
+
+Make sure to delete `SumAni.ipf` from the `data` folder. This has an addon inside it that's responsible for creating that button. If you are using @fiote's addons, you'll still need it to load his until he finishes converting his addons.
+
 # Submitting Addons
 
 Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
