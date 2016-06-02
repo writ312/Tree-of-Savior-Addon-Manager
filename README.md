@@ -2,7 +2,7 @@
 
 Tree of Savior Addon Manager is an application that allows you to easily find and downloads addons and keep them up to date. This does all of the work for you so you can simply worry about playing the game.
 
-![Tree of Savior Experience Viewer](http://i.imgur.com/rzMR83k.png)
+![Tree of Savior Addon Manager](http://i.imgur.com/H0uHx0R.gif)
 
 # Download / Install
 
