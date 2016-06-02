@@ -19,15 +19,14 @@
 		vm.browseForDirectory = function() {
 			var remote = require('remote');
 			var dialog = remote.require('dialog');
-			vm.treeOfSaviorDirectory = dialog.showOpenDialog({ properties: ['openDirectory']});
-			settings.saveTreeOfSaviorDirectory(vm.treeOfSaviorDirectory);
-			validateDirectory();
-		};
+			var directories = dialog.showOpenDialog({ properties: ['openDirectory']});
 
-		vm.updateDirectory = function() {
-			settings.saveTreeOfSaviorDirectory(vm.treeOfSaviorDirectory);
-			validateDirectory();
-		}
+			if(directories && directories.length > 0) {
+				vm.treeOfSaviorDirectory = directories[0];
+				settings.saveTreeOfSaviorDirectory(vm.treeOfSaviorDirectory);
+				validateDirectory();
+			}
+		};
 
 		vm.isValidDirectory = function() {
 			return settings.getIsValidDirectory();

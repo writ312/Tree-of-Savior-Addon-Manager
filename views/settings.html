@@ -5,8 +5,7 @@
 		<form name="userForm">
 			<div layout-gt-sm="row">
 				<md-input-container class="md-block" flex-gt-sm>
-					<label>Tree of Savior Directory</label>
-					<input ng-model="vm.treeOfSaviorDirectory" ng-change="vm.updateDirectory();">
+					<span>{{vm.treeOfSaviorDirectory}}</span>
 					<md-button class="md-raised" ng-click="vm.browseForDirectory();">Browse...</md-button>
 				</md-input-container>
 			</div>
