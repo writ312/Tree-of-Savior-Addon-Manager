@@ -53,7 +53,7 @@ Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Communit
 }
 ```
 
-Then, in your own repo where your addon lives, create an `addon.json` that describes your packages.
+Then, in your own repo where your addon lives, create an `addons.json` that describes your packages.
 
 ```json
 [
