@@ -39,7 +39,7 @@
 		function createSettingsFolder(addon, callback) {
 			settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 				var mkdirp = require('mkdirp');
-				var directoryName = `${treeOfSaviorDirectory}\\addons\\${addon.file}`;
+				var directoryName = `${treeOfSaviorDirectory}/addons/${addon.file}`;
 
 				mkdirp(directoryName, function (error) {
 					if (error) {
@@ -63,7 +63,7 @@
 						var request = require('request');
 						var fileRequest = request.get(dependency.url);
 						var filename = dependency.url.match(/.*\/(.*)$/)[1];
-						var destinationFile = `${treeOfSaviorDirectory}\\release\\lua\\${filename}`;
+						var destinationFile = `${treeOfSaviorDirectory}/release/lua/${filename}`;
 
 						fileRequest.on('response', function(response) {
 							if(response.statusCode !== 200) {
@@ -222,7 +222,7 @@
 
 		function getAddonPath(addon, callback) {
 			settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
-				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "\\data\\";
+				var treeOfSaviorDataDirectory = treeOfSaviorDirectory + "/data/";
 				var filename = treeOfSaviorDataDirectory + "_" + addon.file + "-" + addon.unicode + "-" + addon.fileVersion + "." + addon.extension;
 
 				$log.info("getAddonPath: " + filename);

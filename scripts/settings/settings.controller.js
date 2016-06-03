@@ -34,7 +34,7 @@
 
 		function validateDirectory() {
 			var fs = require("fs");
-			var exe = vm.treeOfSaviorDirectory + "\\release\\Client_tos.exe";
+			var exe = vm.treeOfSaviorDirectory + "/release/Client_tos.exe";
 
 			fs.stat(exe, function(error, stat) {
 				if(error == null) {
