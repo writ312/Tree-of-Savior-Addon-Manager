@@ -196,6 +196,17 @@
 									});
 								} else {
 									$log.error(filename + " does not exist so cannot remove it.");
+									
+									settings.removeInstalledAddon(addon);
+
+									scope.$apply(function() {
+										addon.isDownloading = false;
+										addon.isInstalled = false;
+									});
+
+									if(callback) {
+										return callback(true);
+									}
 								}
 							});
 						});
