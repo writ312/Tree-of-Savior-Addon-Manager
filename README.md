@@ -26,7 +26,7 @@ This button only works for the Steam version of Tree of Savior. If you're using 
 
 * Starting over
 
-If things ever get out of sync from some reason, you can find settings and addon cache in `%AppData%\Tree of Savior Addon Manager`. Open the run prompt or Windows Explorer and type that path in to open it.
+If things ever get out of sync from some reason, you can find settings and addon cache in `%AppData%\tree-of-savior-addon-manager`. Open the run prompt or Windows Explorer and type that path in to open it.
 
 There are two files here named `settings.json` and `addons.json`. `settings.json` is responsible for saving your Tree of Savior directory location. `addons.json` is responsible for keeping track of the addons you have installed. If something goes wrong and things get out of sync, either manually make the changes in this file or delete that file and the installed ipfs manually and start over. Hopefully you won't really have to do this.
 
