@@ -10,6 +10,11 @@
 			<span class="md-body-1">Available version: {{vm.addon.fileVersion}}</span>
 			<span data-ng-show="vm.addon.failedInstall"><p class="error">Failed to install addon. Please contact <a href data-ng-click="openIssues(vm.addon);">{{vm.addon.author}}</a>.</p></span>
 			<span data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></span>
+			<div class="inset" hide-sm></div>
+			<div flex>
+				<a href data-ng-click="openReadme(vm.addon);">Details</a>
+			</div>
+			<p ng-bind-html="vm.addon.readme"></p>
 		</md-card-title-text>
 		<md-card-title-media>
 			<div class="md-media-lg card-media"></div>

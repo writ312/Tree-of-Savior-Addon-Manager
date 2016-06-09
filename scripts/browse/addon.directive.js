@@ -5,7 +5,7 @@
 		.module('app')
 		.directive('addon', addon);
 
-	function addon(installer) {
+	function addon($log, $compile, $sce, installer, readmeretriever) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
@@ -45,6 +45,22 @@
 			scope.openIssues = function(addon) {
 				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
 				require("shell").openExternal(issuesUrl);
+			}
+
+			scope.openReadme = function(addon) {
+				$log.info("Opening readme");
+				readmeretriever.getReadme(addon, function(success, readme) {
+					if(success) {
+						var marked = require('marked');
+						marked.setOptions({
+							sanitize: true
+						});
+						scope.$apply(function() {
+							addon.readme = $sce.trustAsHtml(marked(readme));
+							console.log("readme: " + addon.readme);
+						});
+					}
+				});
 			}
 		}
 	}
