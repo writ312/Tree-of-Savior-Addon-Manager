@@ -103,9 +103,3 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 `description`: A detailed description of your addon.
 
 `tags`: A list of keywords that describes what your addon is for searching.
-
-# Donate
-
-Not required by any means, but feel free to donate if you want!
-
-[Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6JBF88ZAUCD34)
