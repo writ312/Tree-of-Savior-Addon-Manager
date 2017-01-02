@@ -8,7 +8,7 @@
 	addonretriever.$inject = ['$log', '$http', 'settings'];
 
 	function addonretriever($log, $http, settings) {
-		var masterSources = "https://raw.githubusercontent.com/Tree-of-Savior-Addon-Community/Addons/master/addons.json";
+		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
 
 		var service = {
 			getAddons : getAddons,
