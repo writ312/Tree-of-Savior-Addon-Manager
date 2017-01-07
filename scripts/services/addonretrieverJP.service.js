@@ -19,67 +19,67 @@
 
 		function getAddons(callback) {
 			settings.getInstalledAddons(function(installedAddons) {
-				$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-					$log.info("Loading master sources from " + masterSources);
-					settings.latestVersion = data.version
-					var addons = [];
+				if(!settings.isLoadedJToSData){
+					$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
+						settings.JToSData = data;
+					});
+				}
+				var addons = [];
+				angular.forEach(settings.JToSData.sources, function(source) {
+					var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
 
-					angular.forEach(data.sources, function(source) {
-						var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
+					$http.get(repo + "?" + new Date().toString()).success(function(sourceData) {
+						angular.forEach(sourceData, function(addon) {
 
-						$http.get(repo + "?" + new Date().toString()).success(function(sourceData) {
-							angular.forEach(sourceData, function(addon) {
+							var repoValues = source.repo.split('/');
 
-								var repoValues = source.repo.split('/');
+							addon.author = repoValues[0];
+							addon.repo = repoValues[1];
 
-								addon.author = repoValues[0];
-								addon.repo = repoValues[1];
+							$log.info("Loading addon " + addon.name + " by " + addon.author);
 
-								$log.info("Loading addon " + addon.name + " by " + addon.author);
+							addon.twitterAccount = source.twitter
+							$log.info(source.twitter);
 
-								addon.twitterAccount = source.twitter
-								$log.info(source.twitter);
+							if (addon.twitterAccount) 
+								addon.existTwitterAccount = true
+								
+							for(var attributeName in source) {
+								addon[attributeName] = source[attributeName];
+							}
 
-								if (addon.twitterAccount) 
-									addon.existTwitterAccount = true
-									
-								for(var attributeName in source) {
-									addon[attributeName] = source[attributeName];
-								}
+							addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
+							addon.isDownloading = false;
 
-								addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
-								addon.isDownloading = false;
+							if(installedAddons) {
+								var installedAddon = installedAddons[addon.file];
 
-								if(installedAddons) {
-									var installedAddon = installedAddons[addon.file];
+								if(installedAddon) {
+									addon.installedAddon = installedAddon;
+									addon.isInstalled = true;
+									var semver = require('semver');
 
-									if(installedAddon) {
-										addon.installedAddon = installedAddon;
-										addon.isInstalled = true;
-										var semver = require('semver');
+									addon.installedFileVersion = installedAddon.fileVersion;
 
-										addon.installedFileVersion = installedAddon.fileVersion;
+									$log.info("Update available for " + addon.name + "? " + semver.gt(addon.fileVersion, installedAddon.fileVersion));
 
-										$log.info("Update available for " + addon.name + "? " + semver.gt(addon.fileVersion, installedAddon.fileVersion));
-
-										if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
-											addon.isUpdateAvailable = true;
-										} else {
-										   addon.isUpdateAvailable = false;
-									   }
+									if(semver.gt(addon.fileVersion, installedAddon.fileVersion)) {
+										addon.isUpdateAvailable = true;
 									} else {
-										addon.isInstalled = false;
 										addon.isUpdateAvailable = false;
 									}
+								} else {
+									addon.isInstalled = false;
+									addon.isUpdateAvailable = false;
 								}
+							}
 
-								addons.push(addon);
-							});
+							addons.push(addon);
 						});
 					});
-
-					return callback(addons);
 				});
+
+				return callback(addons);
 			});
 		}
 

@@ -18,6 +18,7 @@
 			}
 		};
 		var isShowReadme = false;
+		var isLoadedReadme = false
 		return directive;
 
 		function link(scope, element, attrs) {
@@ -52,6 +53,10 @@
 			}
 
 			scope.openReadme = function(addon) {
+				if(addon.isLoadedReadme){
+					addon.isShowReadme = true
+					return;
+				}
 				$log.info("Opening readme");
 				readmeretriever.getReadme(addon, function(success, readme) {
 					if(success) {
@@ -64,6 +69,7 @@
 							addon.readme = $sce.trustAsHtml(marked(readme));
 							console.log("readme: " + addon.readme);
 							addon.isShowReadme = true
+							addon.isLoadedReadme = true
 					});
 					}
 				});
@@ -71,7 +77,6 @@
 			scope.closeReadme = function(addon){
 				$log.info("Closing readme");
 				addon.isShowReadme = false
-				// addon.readme = $sce.trustAsHtml('');
 			}
 		}
 	}

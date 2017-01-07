@@ -10,14 +10,14 @@
 	/* @ngInject */
 	function SettingsController($http,settings) {
 		var vm = this;
-		 vm.thisVersion = require('./package.json').version;
-		 vm.latestVersion = null
-		 var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
+		vm.thisVersion = require('./package.json').version;
+		vm.latestVersion = null
+		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
 		$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-			// settings.jtosData = data;
+			settings.JToSData = data;
+			settings.isLoadedJToSData = true;
 			vm.latestVersion = data.version
 		});
-		// vm.isLatestVersion = true
 		settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 			vm.treeOfSaviorDirectory = treeOfSaviorDirectory;
 			validateDirectory();

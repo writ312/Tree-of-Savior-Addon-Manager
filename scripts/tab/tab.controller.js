@@ -22,6 +22,11 @@
 		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {
+			if(!settings.isLoadedJToSData){
+				$location.url('/settings');
+				return;				
+			}
+			
 			switch(current) {
 				case 0:
 					$location.url('/settings');
