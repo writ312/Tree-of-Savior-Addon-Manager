@@ -6,23 +6,25 @@
 
 		<link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" />
 		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="stylesheet" href="./css/github-markdown.css" />
+		
 	</head>
-	<body ng-cloak ng-controller="TabController as vm">
+	<body style="font-family:'メイリオ',Meiryo UI;" ng-cloak ng-controller="TabController as vm">
 
 		<div id="wrapper">
 			<div id="body">
 				<div class="content">
 					<md-tabs md-stretch-tabs md-selected="vm.selectedIndex">
 						<md-tab label="Settings"></md-tab>
-						<md-tab label="Browse" ng-disabled="!vm.isValidDirectory();"></md-tab>
-						<md-tab label="Featured" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
 
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
 			<div id="footer" md-whiteframe="3">
-				<md-button data-ng-click="vm.launchGame();" class="md-raised">Launch Tree of Savior</md-button>
+				<md-button data-ng-click="vm.launchGame();" class="md-raised">Open ToS JP Site</md-button>
 			</div>
 		</div>
 
@@ -39,12 +41,16 @@
 		<script src="./scripts/tab/tab.controller.js"></script>
 		<script src="./scripts/featured/featured.controller.js"></script>
 		<script src="./scripts/browse/browse.controller.js"></script>
+		<script src="./scripts/browse/browseJP.controller.js"></script>
 		<script src="./scripts/installed/installed.controller.js"></script>
 		<script src="./scripts/settings/settings.controller.js"></script>
 		<script src="./scripts/services/addonretriever.service.js"></script>
+		<script src="./scripts/services/addonretrieverJP.service.js"></script>
 		<script src="./scripts/services/readmeretriever.service.js"></script>
 		<script src="./scripts/services/installer.service.js"></script>
 		<script src="./scripts/services/settings.service.js"></script>
 		<script src="./scripts/browse/addon.directive.js"></script>
+		<script src="./scripts/marked.js"></script>
+		
 	</body>
 </html>

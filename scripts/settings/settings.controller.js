@@ -5,12 +5,19 @@
 		.module('app')
 		.controller('SettingsController', SettingsController);
 
-	SettingsController.$inject = ['settings'];
+	SettingsController.$inject = ['$http','settings'];
 
 	/* @ngInject */
-	function SettingsController(settings) {
+	function SettingsController($http,settings) {
 		var vm = this;
-
+		 vm.thisVersion = require('./package.json').version;
+		 vm.latestVersion = null
+		 var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
+		$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
+			// settings.jtosData = data;
+			vm.latestVersion = data.version
+		});
+		// vm.isLatestVersion = true
 		settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 			vm.treeOfSaviorDirectory = treeOfSaviorDirectory;
 			validateDirectory();
@@ -31,7 +38,9 @@
 		vm.isValidDirectory = function() {
 			return settings.getIsValidDirectory();
 		};
-
+		vm.isLatestVersion = function(){
+			return (vm.thisVersion == vm.latestVersion)?true:false;
+		}
 		function validateDirectory() {
 			var fs = require("fs");
 			var exe = vm.treeOfSaviorDirectory + "/release/Client_tos.exe";

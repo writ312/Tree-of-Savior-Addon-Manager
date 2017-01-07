@@ -1,7 +1,14 @@
 <md-card md-whiteframe="5">
 	<md-card-title>
 		<md-card-title-text>
-			<span class="md-headline">{{vm.addon.name}}</span>
+			<span class="md-headline">{{vm.addon.name}}
+			<md-button data-ng-click="openWebsite(vm.addon);" class="md-fab" aria-label="github">
+    			<img src="img/GitHub-Mark-64px.png" style="my-img-button" alt="github">
+			</md-button>
+			<md-button class="md-fab"data-ng-show="vm.addon.existTwitterAccount" data-ng-click="openTwitter(vm.addon);" aria-label="twitter">
+    			 <img src="img/twitter.png" style="my-img-button" alt="twitter">
+			</md-button>
+			</span>
 			<span class="md-subhead">{{vm.addon.author}}</span>
 			<md-chips data-ng-model="vm.addon.tags" readonly="true">
 			</md-chips>
@@ -12,16 +19,19 @@
 			<span data-ng-show="vm.addon.uninstallError"><p class="error">Could not uninstall addon. Make sure the game is closed and then try again.</p></span>
 			<div class="inset" hide-sm></div>
 			<div flex>
-				<a href data-ng-click="openReadme(vm.addon);">Details</a>
 			</div>
-			<p ng-bind-html="vm.addon.readme"></p>
+			<p ng-bind-html="vm.addon.readme" data-ng-show="vm.addon.isShowReadme" class ="markdown-body"></p>
 		</md-card-title-text>
 		<md-card-title-media>
 			<div class="md-media-lg card-media"></div>
 		</md-card-title-media>
 	</md-card-title>
 	<md-card-actions layout="row" layout-align="end center">
-		<md-button data-ng-click="openWebsite(vm.addon);" class="md-raised">Website</md-button>
+		<md-button  data-ng-show="!vm.addon.isShowReadme" class="md-raised" data-ng-click="openReadme(vm.addon);">OpenReadme</md-button>
+		<md-button  data-ng-show="vm.addon.isShowReadme"  class="md-raised" data-ng-click="closeReadme(vm.addon);">CloseReadme</md-button>
+
+		<!--<md-button style="background-color:#55acee" >Twitter</md-button>-->
+		<!--<md-button data-ng-click="openWebsite(vm.addon);" class="md-raised">GitHub</md-button>-->
 		<md-button data-ng-click="install(vm.addon);" class="md-raised" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="!vm.addon.isDownloading && !vm.addon.isInstalled">Install</md-button>
 		<md-button data-ng-click="update(vm.addon);" class="md-raised md-accent" data-ng-class="{'md-warn': vm.addon.failedInstall}" data-ng-show="vm.addon.isUpdateAvailable && vm.addon.isInstalled">Update</md-button>
 		<md-button data-ng-click="uninstall(vm.addon);" class="md-raised" data-ng-show="vm.addon.isInstalled && !vm.addon.failedInstall">Uninstall</md-button>

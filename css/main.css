@@ -35,3 +35,13 @@ html, body {
 .error {
 	color: #F44336;
 }
+
+.md-button.md-fab {
+  line-height: 5.6rem;
+  min-width: 0;
+  width: 3.0rem;
+  height: 3.0rem;
+  border-radius: 50%;
+  box-shadow:0 0px 0px 0 rgba(0,0,0,0);
+  background-color:rgba(0,0,0,0)
+}

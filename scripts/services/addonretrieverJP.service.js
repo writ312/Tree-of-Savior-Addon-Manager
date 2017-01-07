@@ -3,25 +3,25 @@
 
 	angular
 		.module('app')
-		.factory('addonretriever', addonretriever);
+		.factory('addonretrieverJP', addonretrieverJP);
 
-	addonretriever.$inject = ['$log', '$http', 'settings'];
+	addonretrieverJP.$inject = ['$log', '$http', 'settings'];
 
-	function addonretriever($log, $http, settings) {
-		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/addons.json";
+	function addonretrieverJP($log, $http, settings) {
+		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
 
 		var service = {
 			getAddons : getAddons,
 			getDependencies : getDependencies
 		};
-		
+		var existTwitterAccount = false
 		return service;
 
 		function getAddons(callback) {
 			settings.getInstalledAddons(function(installedAddons) {
 				$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
 					$log.info("Loading master sources from " + masterSources);
-
+					settings.latestVersion = data.version
 					var addons = [];
 
 					angular.forEach(data.sources, function(source) {
@@ -37,6 +37,12 @@
 
 								$log.info("Loading addon " + addon.name + " by " + addon.author);
 
+								addon.twitterAccount = source.twitter
+								$log.info(source.twitter);
+
+								if (addon.twitterAccount) 
+									addon.existTwitterAccount = true
+									
 								for(var attributeName in source) {
 									addon[attributeName] = source[attributeName];
 								}

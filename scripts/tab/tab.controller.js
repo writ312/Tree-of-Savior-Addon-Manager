@@ -18,7 +18,7 @@
 		};
 
 		vm.launchGame = function() {
-			require("shell").openExternal("steam://rungameid/372000");
+			require("shell").openExternal("http://tos.nexon.co.jp/players");
 		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {
@@ -32,7 +32,7 @@
 					break;
 
 				case 2:
-					$location.url('/featured');
+					$location.url('/browseJP');
 					break;
 			}
 		});

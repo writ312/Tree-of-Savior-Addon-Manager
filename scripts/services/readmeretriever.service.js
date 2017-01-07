@@ -34,7 +34,7 @@
 		}
 
 		function getReadmeUrl(addon, callback) {
-			var readmeUrl = `https://raw.githubusercontent.com/${addon.repo}/master/addons/${addon.file}/README.md`;
+			var readmeUrl = `https://raw.githubusercontent.com/${addon.repo}/master/${addon.file}/README.md`;
 
 			return callback(readmeUrl);
 		}

@@ -21,7 +21,12 @@
 					templateUrl: 'views/featured.html',
 					controller: 'FeaturedController as featuredController'
 				})
-				.state('browse', {
+				.state('JToS', {	
+					url: '/browseJP',
+					templateUrl: 'views/browse.html',
+					controller: 'BrowseControllerJP as browseController'
+				})
+				.state('IToS', {
 					url: '/browse',
 					templateUrl: 'views/browse.html',
 					controller: 'BrowseController as browseController'

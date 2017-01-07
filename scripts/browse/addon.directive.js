@@ -17,7 +17,7 @@
 				addon: '='
 			}
 		};
-
+		var isShowReadme = false;
 		return directive;
 
 		function link(scope, element, attrs) {
@@ -46,21 +46,32 @@
 				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
 				require("shell").openExternal(issuesUrl);
 			}
+			scope.openTwitter = function(addon) {
+				var twitterUrl = "https://twitter.com/" + addon.twitterAccount;
+				require("shell").openExternal(twitterUrl);
+			}
 
 			scope.openReadme = function(addon) {
 				$log.info("Opening readme");
 				readmeretriever.getReadme(addon, function(success, readme) {
 					if(success) {
-						var marked = require('marked');
+						// var marked = require('marked');
 						marked.setOptions({
 							sanitize: true
 						});
 						scope.$apply(function() {
+							var close = 
 							addon.readme = $sce.trustAsHtml(marked(readme));
 							console.log("readme: " + addon.readme);
-						});
+							addon.isShowReadme = true
+					});
 					}
 				});
+			}
+			scope.closeReadme = function(addon){
+				$log.info("Closing readme");
+				addon.isShowReadme = false
+				// addon.readme = $sce.trustAsHtml('');
 			}
 		}
 	}

@@ -13,7 +13,6 @@
 		const settingsFile = "settings";
 
 		var isValidDirectory = false;
-
 		var service = {
 			addInstalledAddon : addInstalledAddon,
 			removeInstalledAddon : removeInstalledAddon,
