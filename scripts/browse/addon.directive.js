@@ -5,7 +5,7 @@
 		.module('app')
 		.directive('addon', addon);
 
-	function addon($log, $compile, $sce, installer, readmeretriever) {
+	function addon($log, $compile, $sce,  $location,  $anchorScroll,installer, readmeretriever) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
@@ -77,6 +77,8 @@
 			scope.closeReadme = function(addon){
 				$log.info("Closing readme");
 				addon.isShowReadme = false
+				$location.hash(addon.name);
+				$anchorScroll();		
 			}
 		}
 	}

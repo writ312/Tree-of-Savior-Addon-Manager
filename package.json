@@ -1,6 +1,6 @@
 {
   "name": "tree-of-savior-addon-manager",
-  "version": "0.2.2.β",
+  "version": "0.2.2",
   "description": "An addon manager for Tree of Savior.",
   "main": "main.js",
   "scripts": {

@@ -5,7 +5,7 @@
 		.module('app')
 		.factory('addonretrieverJP', addonretrieverJP);
 
-	addonretrieverJP.$inject = ['$log', '$http', 'settings'];
+	addonretrieverJP.$inject = ['$log', '$http', 'settings', '$location',  '$anchorScroll'];
 
 	function addonretrieverJP($log, $http, settings) {
 		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";

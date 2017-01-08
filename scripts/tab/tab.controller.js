@@ -5,10 +5,10 @@
 		.module('app')
 		.controller('TabController', TabController);
 
-	TabController.$inject = ['$scope', '$location', 'settings'];
+	TabController.$inject = ['$scope', '$location',  '$anchorScroll','settings'];
 
 	/* @ngInject */
-	function TabController($scope, $location, settings) {
+	function TabController($scope, $location, $anchorScroll,settings) {
 		var vm = this;
 
 		vm.selectedIndex = 0;
@@ -22,11 +22,6 @@
 		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {
-			if(!settings.isLoadedJToSData){
-				$location.url('/settings');
-				return;				
-			}
-			
 			switch(current) {
 				case 0:
 					$location.url('/settings');
@@ -41,5 +36,12 @@
 					break;
 			}
 		});
+		vm.jumpTo = function () {
+ 			$location.hash('top');
+			$anchorScroll();
+		}
+		vm.showTab = function(){
+			return settings.isLoadedJToSData;
+		};
 	}
 })();
