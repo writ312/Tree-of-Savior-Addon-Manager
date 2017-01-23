@@ -25,16 +25,33 @@
 					if(response.statusCode === 200) {
 						$log.info("Retrieving readme successful.");
 						return callback(true, body);
-					} else {
-						$log.error("Retrieving readme failed.");
-						return callback(false);
+					}else{
+						getReadmeUrlByName(addon, function(readmeUrl) {
+							$log.info(`Retrieving readme for ${addon.name} at ${readmeUrl}`);
+							var fileRequest = request.get(readmeUrl, function(error, response, body) {
+								$log.info(`readme status code: ${response.statusCode}`);
+								if(response.statusCode === 200) {
+									$log.info("Retrieving readme successful.");
+									return callback(true, body);
+								}else{
+									$log.info("Retrieving readme failed.");
+									return callback(false);
+								}
+							});
+						});
 					}
 				});
 			});
+			
 		}
 
 		function getReadmeUrl(addon, callback) {
 			var readmeUrl = `https://raw.githubusercontent.com/${addon.repo}/master/${addon.file}/README.md`;
+
+			return callback(readmeUrl);
+		}
+		function getReadmeUrlByName(addon,callback){
+			var readmeUrl = `https://raw.githubusercontent.com/${addon.repo}/master/${addon.name.replace(/\s+/g, "")}/README.md`;
 
 			return callback(readmeUrl);
 		}

@@ -41,7 +41,7 @@
 			$anchorScroll();
 		}
 		vm.showTab = function(){
-			return settings.isLoadedJToSData;
+			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
 	}
 })();

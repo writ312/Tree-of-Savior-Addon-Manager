@@ -11,8 +11,6 @@
 		const storage = require('electron-json-storage');
 		const addonsFile = "addons";
 		const settingsFile = "settings";
-		var JToSData = null;
-		var isLoadedJToSData = false;
 		var isValidDirectory = false;
 		var service = {
 			addInstalledAddon : addInstalledAddon,
@@ -21,7 +19,9 @@
 			getTreeOfSaviorDirectory : getTreeOfSaviorDirectory,
 			saveTreeOfSaviorDirectory : saveTreeOfSaviorDirectory,
 			getIsValidDirectory : getIsValidDirectory,
-			setIsValidDirectory : setIsValidDirectory
+			setIsValidDirectory : setIsValidDirectory,
+			JTos : {},
+			ITos : {}
 		};
 
 		return service;

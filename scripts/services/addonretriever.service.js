@@ -8,7 +8,7 @@
 	addonretriever.$inject = ['$log', '$http', 'settings'];
 
 	function addonretriever($log, $http, settings) {
-		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/addons.json";
+		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
 
 		var service = {
 			getAddons : getAddons,
@@ -23,6 +23,7 @@
 					$log.info("Loading master sources from " + masterSources);
 
 					var addons = [];
+					var ITos = settings.ITos
 
 					angular.forEach(data.sources, function(source) {
 						var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
@@ -66,7 +67,12 @@
 										addon.isUpdateAvailable = false;
 									}
 								}
-
+								if(addon.date = ITos.date[addon.releaseTag])
+								{
+									addon.date = ITos.date[addon.releaseTag]
+									var moment = require('moment')
+									addon.dateParsed = moment(addon.date).format("YYYY年MM月DD日")
+								}
 								addons.push(addon);
 							});
 						});

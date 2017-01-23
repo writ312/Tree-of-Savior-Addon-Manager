@@ -9,7 +9,7 @@
 
 	function BrowseControllerJP($scope, $http, addonretriever, settings, $log) {
 		var viewModel = this;
-
+		this.sort ="name"
 		addonretriever.getAddons(function(addons) {
 			viewModel.addons = addons;
 		});

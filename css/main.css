@@ -38,6 +38,9 @@ html, body {
 	color: #F44336;
 }
 
+md-card {
+	background-color: #FAFAFA; 
+}
 .md-button.md-fab {
   line-height: 5.6rem;
   min-width: 0;

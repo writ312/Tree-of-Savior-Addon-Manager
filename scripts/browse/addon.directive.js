@@ -5,7 +5,7 @@
 		.module('app')
 		.directive('addon', addon);
 
-	function addon($log, $compile, $sce,  $location,  $anchorScroll,installer, readmeretriever) {
+	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
@@ -18,7 +18,8 @@
 			}
 		};
 		var isShowReadme = false;
-		var isLoadedReadme = false
+		var isLoadedReadme = false;
+
 		return directive;
 
 		function link(scope, element, attrs) {
@@ -80,6 +81,9 @@
 				$location.hash(addon.name);
 				$anchorScroll();		
 			}
+			
+
+
 		}
 	}
 

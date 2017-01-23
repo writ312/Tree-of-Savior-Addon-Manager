@@ -7,17 +7,20 @@
 
 	SettingsController.$inject = ['$http','settings'];
 
+	var xml2js = require('xml2js'),
+	    parser = new xml2js.Parser(),
+		moment = require('moment')
+
 	/* @ngInject */
 	function SettingsController($http,settings) {
 		var vm = this;
 		vm.thisVersion = require('./package.json').version;
-		vm.latestVersion = null
-		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
-		$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-			settings.JToSData = data;
-			settings.isLoadedJToSData = true;
-			vm.latestVersion = data.version
-		});
+		vm.latestVersion = vm.thisVersion
+		var JTosSource = "https://raw.githubusercontent.com/JTosAddon/Addons/master/managers.json";
+		getAddonsDate($http,vm,JTosSource,settings.JTos)
+		var ITosSource = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
+		getAddonsDate($http,vm,ITosSource,settings.ITos)
+		
 		settings.getTreeOfSaviorDirectory(function(treeOfSaviorDirectory) {
 			vm.treeOfSaviorDirectory = treeOfSaviorDirectory;
 			validateDirectory();
@@ -53,5 +56,32 @@
 				}
 			});
 		}
+	}
+	function getAddonsDate($http,vm,sourceUrl,setting){
+		setting.date = {}
+		$http.get(sourceUrl + "?" + new Date().toString(), {cache: false}).success(function(data) {
+			setting.data = data;
+			vm.latestVersion =  data.version || vm.latestVersion
+			angular.forEach(data.sources, function(source) {
+				_getAddonsDate($http,vm,setting,source,'')				
+			});
+			setting.isLoad = true;
+		});
+	}
+	function _getAddonsDate($http,vm,setting,source,nextPageUrl){
+		var url = `https://github.com/${source.repo}/releases.atom` + nextPageUrl
+		$http.get(url).success(function(sourceData) {
+			parser.parseString(sourceData, function (err, result) {
+				var entry = result.feed.entry
+				for (var i in entry){
+					var  date = entry[i].updated[0].replace(/T.*/,"").split(/-/)
+					date[1] -=  1
+					var releaseTag = entry[i].id[0].match(/[^\/]*$/)
+					setting.date[releaseTag[0]] = moment(date)
+				if( i == 9)
+					_getAddonsDate($http,vm,setting,source,'?after='+releaseTag)
+				}
+			});
+		});
 	}
 })();

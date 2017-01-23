@@ -1,6 +1,5 @@
 (function() {
 	'use strict';
-
 	angular
 		.module('app')
 		.factory('addonretrieverJP', addonretrieverJP);
@@ -8,26 +7,31 @@
 	addonretrieverJP.$inject = ['$log', '$http', 'settings', '$location',  '$anchorScroll'];
 
 	function addonretrieverJP($log, $http, settings) {
-		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/addons.json";
+		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/master/managers.json";
 
 		var service = {
 			getAddons : getAddons,
 			getDependencies : getDependencies
 		};
-		var existTwitterAccount = false
+		var existTwitterAccount = false		
 		return service;
 
+		function getXml(url){
+
+		}
+
 		function getAddons(callback) {
+			var JTos = settings.JTos
 			settings.getInstalledAddons(function(installedAddons) {
-				if(!settings.isLoadedJToSData){
+				if(!JTos.data){
 					$http.get(masterSources + "?" + new Date().toString(), {cache: false}).success(function(data) {
-						settings.JToSData = data;
+						JTos.data = data;
 					});
 				}
 				var addons = [];
-				angular.forEach(settings.JToSData.sources, function(source) {
+				angular.forEach(JTos.data.sources, function(source) {
 					var repo = `https://raw.githubusercontent.com/${source.repo}/master/addons.json`;
-
+					
 					$http.get(repo + "?" + new Date().toString()).success(function(sourceData) {
 						angular.forEach(sourceData, function(addon) {
 
@@ -73,14 +77,16 @@
 									addon.isUpdateAvailable = false;
 								}
 							}
-
+							addon.date = JTos.date[addon.releaseTag]
+							var moment = require('moment')
+							addon.dateParsed = moment(addon.date).format("YYYY年MM月DD日")
 							addons.push(addon);
 						});
 					});
 				});
-
 				return callback(addons);
 			});
+
 		}
 
 		function getDependencies(callback) {

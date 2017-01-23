@@ -1,10 +1,13 @@
 		
+
 <div layout="column" layout-padding>
-	<md-input-container class="md-block">
-	
-		<label><img id = "search"src="img/search.png"  alt="search">Search</label>
-		<input data-ng-model="browseController.searchQuery">
-	</md-input-container>
+	<md-card style="height:65px" md-whiteframe="3">
+		<md-input-container  class="md-block">
+			<label><img id = "search"src="img/search.png"  alt="search">Search</label>
+			<input data-ng-model="browseController.searchQuery">
+		</md-input-container>
+	</md-card>
+	<md-card  md-whiteframe="3">
 	<div layout="row">
 		<md-radio-group layout="row" ng-model="browseController.isInstalled">
 			<md-radio-button data-ng-value="undefined" class="md-primary">All</md-radio-button>
@@ -13,11 +16,21 @@
 		</md-radio-group>
 	</div>
 	<div layout="row">
+		<md-radio-group layout="row" ng-model="browseController.sort">
+			<md-radio-button data-ng-value="'name'">名前(昇順)</md-radio-button>
+			<md-radio-button data-ng-value="'-name'">名前(降順)</md-radio-button>
+			<md-radio-button data-ng-value="'date'">日付(昇順)</md-radio-button>
+			<md-radio-button data-ng-value="'-date'">日付(降順)</md-radio-button>
+			<md-radio-button data-ng-value="'author'">開発者</md-radio-button>
+		</md-radio-group>
+	</div>
+	</md-card>
+	<div layout="row">
 		<md-input-container>
 			<md-checkbox ng-model="browseController.isUpdateAvailable" aria-label="Is update available?">Is update available?</md-checkbox>
 		</md-input-container>
 	</div>
-	<div data-ng-repeat="addon in browseController.addons | orderBy:'name' | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
+	<div data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
 		<addon addon="addon"></addon>
 	</div>
 </div>

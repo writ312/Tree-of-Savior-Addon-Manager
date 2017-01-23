@@ -12,13 +12,13 @@
 	<body style="font-family:'メイリオ',Meiryo UI;" ng-cloak ng-controller="TabController as vm">
 		<div id="wrapper">
 			<div id="body">
+				<div id="top" ></div>
 				<div class="content">
 					<md-tabs data-ng-show="vm.showTab()" md-stretch-tabs md-border-bottom  md-selected="vm.selectedIndex">
 						<md-tab label="Settings"></md-tab>
 						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 					</md-tabs>
-					<div id="top" ></div>
 
 					<div id="content" ui-view flex></div>
 				</div>
