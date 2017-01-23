@@ -46,14 +46,9 @@ if /i "%input%"=="y" (
 
 echo.
 echo アドオンマネージャー情報を初期化します。
-rmdir /s /q %APPDATA%\tree-of-savior-addon-manager 2>&1 | find /v "" >NUL 2>&1
+rmdir /s /q %APPDATA%\tree-of-savior-addon-manager >NUL 2>&1
 echo.
-if errorlevel 1 (
-	echo 初期化が完了しました！
-) else (
-	echo 削除出来ませんでした。
-	echo アドオンマネージャーが起動していない事などを確認して、再度実行してください。
-)
+echo 初期化が完了しました！
 echo.
 echo 何かキーを押すと終了します。
 pause >NUL 2>&1
