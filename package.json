@@ -35,8 +35,9 @@
     "electron-json-storage": "^2.0.0",
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
+    "moment": "^2.17.1",
     "request-progress": "^2.0.1",
     "semver": "^5.1.0",
-    "moment": "^2.17.1"
+    "xml2js": "^0.4.17"
   }
 }

@@ -1,5 +1,4 @@
 <md-content class="md-padding">
-	<h2 class="md-display-2">設定</h2>
 	<div   style="color:red"  data-ng-show="!vm.isLatestVersion()" >
 		<p style="color:black">This Version v<span>{{vm.thisVersion}}</span></p>
 		<p>Latest Version v<span>{{vm.latestVersion}}</span></p>
@@ -19,4 +18,7 @@
 			<span data-ng-show="!vm.isValidDirectory();"><p class="error">アドオンをインストールする前に、正しいTree of Saviorのインストールフォルダを指定してください。</p></span>
 		</form>
 	</md-content>
+	<h3>インストール履歴を
+		<md-button class="md-warn md-raised" ng-click="vm.resetInstalledAddons();">初期化する</md-button>
+	</h3>
 </md-content>

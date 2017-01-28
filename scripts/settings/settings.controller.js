@@ -44,6 +44,17 @@
 		vm.isLatestVersion = function(){
 			return (vm.thisVersion == vm.latestVersion)?true:false;
 		}
+		vm.resetInstalledAddons = function (){
+
+			var data = {installedAddons:null}
+			require('electron-json-storage').set("addons", data, function(error) {
+				if(error) {
+					alert(error);
+				} else {
+					alert("初期化しました");
+				}
+			});
+		}
 		function validateDirectory() {
 			var fs = require("fs");
 			var exe = vm.treeOfSaviorDirectory + "/release/Client_tos.exe";
