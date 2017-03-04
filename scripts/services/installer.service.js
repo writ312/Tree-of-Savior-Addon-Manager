@@ -106,6 +106,7 @@
 			fileRequest.on('response', function(response) {
 				$log.info(`status code: ${response.statusCode}`);
 				if(response.statusCode !== 200) {
+					if(scope)					
 					scope.$apply(function() {
 						addon.isDownloading = false;
 						addon.isInstalled = false;
@@ -118,6 +119,7 @@
 					var file = fs.createWriteStream(destinationFile);
 
 					fileRequest.on('error', function(error) {
+						if(scope)
 						scope.$apply(function() {
 							addon.isDownloading = false;
 							addon.failedInstall = true;
@@ -131,6 +133,7 @@
 					fileRequest.pipe(file);
 
 					file.on('finish', function() {
+						if(scope)
 						scope.$apply(function() {
 							addon.isDownloading = false;
 							addon.isInstalled = true;
@@ -149,6 +152,7 @@
 
 					file.on('error', function(error) {
 						fs.unlink(destinationFile);
+						if(scope)
 						scope.$apply(function() {
 							addon.isDownloading = false;
 							addon.failedInstall = true;
@@ -183,7 +187,7 @@
 										} else {
 											addon.uninstallError = false;
 											settings.removeInstalledAddon(addon);
-
+											if(scope)
 											scope.$apply(function() {
 												addon.isDownloading = false;
 												addon.isInstalled = false;
@@ -198,7 +202,7 @@
 									$log.error(filename + " does not exist so cannot remove it.");
 									
 									settings.removeInstalledAddon(addon);
-
+									if(scope)
 									scope.$apply(function() {
 										addon.isDownloading = false;
 										addon.isInstalled = false;

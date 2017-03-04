@@ -36,7 +36,7 @@
 					templateUrl: 'views/installed.html',
 					controller: 'InstalledController as vm'
 				});
-
+				
 			$mdThemingProvider.theme('default')
 				.primaryPalette('blue')
 				.accentPalette('light-green')
