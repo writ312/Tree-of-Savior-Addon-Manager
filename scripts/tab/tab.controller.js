@@ -5,10 +5,10 @@
 		.module('app')
 		.controller('TabController', TabController);
 
-	TabController.$inject = ['$scope', '$location',  '$anchorScroll','settings'];
+	TabController.$inject = ['$scope', '$location',  '$anchorScroll','settings','$state','SharedScopes'];
 
 	/* @ngInject */
-	function TabController($scope, $location, $anchorScroll,settings) {
+	function TabController($scope, $location, $anchorScroll,settings,$state,SharedScopes) {
 		var vm = this;
 
 		vm.selectedIndex = 0;
@@ -34,6 +34,12 @@
 				case 2:
 					$location.url('/browseJP');
 					break;
+				case 3:
+					$location.url('/itemlist');
+					break;
+				case 4:
+					$location.url('/itemsearch');
+					break;
 			}
 		});
 		vm.jumpTo = function () {
@@ -43,5 +49,9 @@
 		vm.showTab = function(){
 			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
+		$scope.reloadRoute = function() {
+			$state.reload();
+		};
+		SharedScopes.setScope('TabController', $scope);
 	}
 })();

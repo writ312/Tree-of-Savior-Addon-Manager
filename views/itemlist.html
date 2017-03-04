@@ -1,0 +1,152 @@
+<div layout="row" >
+	<md-card  flex="15" md-whiteframe="3">
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Unused" >シルバー</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Weapon" >武器</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.SubWeapon" >サブ武器</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Armor" >アーマー</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Drug" >消費アイテム</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Recipe" >レシピ</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Material" >素材</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Gem" >ジェム</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Card" >カード</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Collection" >コレクション</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Quest" >クエスト</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Event" >イベント</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Cube" >キューブ</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.Premium" >プレミアム</md-checkbox >
+		<md-checkbox ng-change="vm.saveChecklist()" ng-model="vm.isShow.warehouse" >倉庫</md-checkbox >
+    </md-card>
+	<md-card  flex="15" md-whiteframe="3">
+		<md-button ng-repeat="(cid , name) in userlist" class="md-raised"  data-ng-class="{'md-primary': (name == vm.selectedChara)}" data-ng-click="vm.openItemlist(cid,name);">{{name}}</md-button>
+	</md-card>
+	<div class ="markdown-body"  flex md-whiteframe="3">
+		<md-card data-ng-show="vm.isShow.Unused"><h2>所持シルバー : {{items.Unused[0][1] | number}}</h2></md-card>
+	
+		<md-card data-ng-show="vm.isShow.Weapon  && items.Weapon "  md-whiteframe="5">
+			<h2 > 武器</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Weapon "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.SubWeapon  && items.SubWeapon "  md-whiteframe="5">
+			<h2 > サブ武器</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.SubWeapon "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Armor  && items.Armor "  md-whiteframe="5">
+			<h2 > アーマー</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Armor "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Drug  && items.Drug "  md-whiteframe="5">
+			<h2 > 消費アイテム</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Drug "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Recipe  && items.Recipe "  md-whiteframe="5">
+			<h2 >レシピ</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Recipe "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Material && items.Material"  md-whiteframe="5">
+			<h2 >素材</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Material"><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Gem && items.Gem"  md-whiteframe="5">
+			<h2 >ジェム</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Gem"><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Card && items.Card"  md-whiteframe="5">
+			<h2 >カード</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Card"><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Collection && items.Collection"  md-whiteframe="5">
+			<h2 >コレクション</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Collection"><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Quest  && items.Quest "  md-whiteframe="5">
+			<h2 >クエスト</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Quest "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Event  && items.Event "  md-whiteframe="5">
+			<h2 >イベント</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Event "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Cube  && items.Cube "  md-whiteframe="5">
+			<h2 > キューブ</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Cube "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.Premium  && items.Premium "  md-whiteframe="5">
+			<h2 >プレミアム</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.Premium "><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+
+		<md-card data-ng-show="vm.isShow.warehouse && items.warehouse"  md-whiteframe="5">
+			<h2 >倉庫</h2>
+			<md-card-actions layout="row" layout-align="end center">
+				<table>
+					<tr ng-repeat="item in items.warehouse"><td>{{item[0]}}</td><td >{{item[1]}}</td></tr>
+				</table>
+			</md-card-actions>
+		</md-card>
+	</div>
+</div>
+

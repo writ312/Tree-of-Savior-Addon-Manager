@@ -55,3 +55,6 @@ md-card {
 	height: auto;
 	float:left;
 }
+.markdown-body h2{
+	margin-left: 20px
+}

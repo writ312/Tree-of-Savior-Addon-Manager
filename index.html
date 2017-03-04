@@ -18,12 +18,14 @@
 						<md-tab label="設定"></md-tab>
 						<md-tab label="IToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
 						<md-tab label="JToS" ng-disabled="!vm.isValidDirectory();"></md-tab>
-					</md-tabs>
-
+						<md-tab label="itemlist" ng-disabled="!vm.isValidDirectory();"></md-tab>
+						<md-tab label="itemsearch" ng-disabled="!vm.isValidDirectory();"></md-tab>
+					</md-tabs>		
 					<div id="content" ui-view flex></div>
 				</div>
 			</div>
 			<div id="footer" md-whiteframe="3">
+				<md-button  class="md-raised" style="float:left"data-ng-click="reloadRoute()">ページの更新</md-button>
 				<md-button  class="md-raised" style="float:left"data-ng-click="vm.jumpTo()">上に戻る</md-button>
 				<md-button data-ng-click="vm.launchGame();" class="md-raised">公式サイトへ</md-button>
 			</div>
@@ -51,6 +53,9 @@
 		<script src="./scripts/services/installer.service.js"></script>
 		<script src="./scripts/services/settings.service.js"></script>
 		<script src="./scripts/browse/addon.directive.js"></script>
+		<script src="./scripts/services/sharedscope.service.js"></script>
+		<script src="./scripts/itemlist/itemlist.controller.js"></script>		
+		<script src="./scripts/itemlist/itemsearch.controller.js"></script>		
 		<script src="./scripts/marked.js"></script>
 		
 	</body>

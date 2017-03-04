@@ -35,8 +35,17 @@
 					url: '/installed',
 					templateUrl: 'views/installed.html',
 					controller: 'InstalledController as vm'
+				})
+				.state('itemlist', {
+					url: '/itemlist',
+					templateUrl: 'views/itemlist.html',
+					controller: 'ItemlistController as vm'
+				})
+				.state('itemsearch', {
+					url: '/itemsearch',
+					templateUrl: 'views/itemsearch.html',
+					controller: 'ItemsearchController as vm'
 				});
-
 			$mdThemingProvider.theme('default')
 				.primaryPalette('blue')
 				.accentPalette('light-green')

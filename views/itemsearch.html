@@ -1,0 +1,18 @@
+<div layout="column" >
+	<md-card style="height:65px" md-whiteframe="5">
+		<md-input-container  class="md-block" >
+			<label><img id = "search"src="img/search.png"  alt="search">Search</label>
+			<input style="font-family:'メイリオ',Meiryo UI;" ng-model="searchStr" ng-keydown="handleKeydown($event)">
+		</md-input-container>
+	</md-card>
+	<div class ="markdown-body"  flex md-whiteframe="3">
+        <md-card ng-repeat="(name , value) in items" md-whiteframe="5">
+            <h2>{{name}}</h2>
+            <md-card-actions layout="row" layout-align="end center">
+                <table>
+                    <tr ng-repeat="item in value |  filter:vm.searchQuery"><td>{{item[0]}}</td><td >{{item[1] | number}}</td></tr>
+                </table>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>
