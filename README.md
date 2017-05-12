@@ -8,7 +8,7 @@ Tree of Savior Addon Manager is an application that allows you to easily find an
 
 If you have previous addons installed from before using this, it's best to delete them all and start from scratch using this app. This includes the `addons` folder and all of the previous ipfs (including `SumAni.ipf`!). No more loaders needed. If you are still using @fiote's addons, you'll still need the old `SumAni.ipf` as it's a dependency for it and those aren't finished being converted yet.
 
-Grab the [latest release](https://github.com/Excrulon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
+Grab the [latest release](https://github.com/JToSAddon/Tree-of-Savior-Addon-Manager/releases/latest), extract it, and run `Tree of Savior Addon Manager.exe`.
 
 # FAQ
 
@@ -32,7 +32,9 @@ There are two files here named `settings.json` and `addons.json`. `settings.json
 
 # Submitting Addons
 
-Make a pull request to [Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
+## IToS
+
+Make a pull request to [Tree-of-Savior-Addon-Community/Addons](https://github.com/Tree-of-Savior-Addon-Community/Addons) in order to update `addons.json` to point to your addon repository. Example:
 
 ```json
 {
@@ -103,3 +105,7 @@ Then, in your own repo where your addon lives, create an `addons.json` that desc
 `description`: A detailed description of your addon.
 
 `tags`: A list of keywords that describes what your addon is for searching.
+
+## JToS
+
+Make a pull request to [JToSAddon/Addons](https://github.com/JToSAddon/Addons) in order to update `managers.json` to point to your addon repository.
