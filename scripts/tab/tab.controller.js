@@ -5,10 +5,10 @@
 		.module('app')
 		.controller('TabController', TabController);
 
-	TabController.$inject = ['$scope', '$location',  '$anchorScroll','settings','$state','SharedScopes'];
+	TabController.$inject = ['$scope', '$location',  '$anchorScroll', 'settings', '$state', 'SharedScopes', '$translate'];
 
 	/* @ngInject */
-	function TabController($scope, $location, $anchorScroll,settings,$state,SharedScopes) {
+	function TabController($scope, $location, $anchorScroll, settings, $state, SharedScopes, $translate) {
 		var vm = this;
 
 		vm.selectedIndex = 0;
@@ -37,12 +37,18 @@
 			}
 		});
 		vm.jumpTo = function () {
- 			$location.hash('top');
+			$location.hash('top');
 			$anchorScroll();
 		}
 		vm.showTab = function(){
 			return (settings.JTos.isLoad && settings.ITos.isLoad);
 		};
+
+		vm.selectedLanguage = $translate.proposedLanguage() || $translate.preferredLanguage();
+		vm.changeLang = function(lang) {
+			$translate.use(lang);
+		};
+
 		$scope.reloadRoute = function() {
 			$state.reload();
 		};
