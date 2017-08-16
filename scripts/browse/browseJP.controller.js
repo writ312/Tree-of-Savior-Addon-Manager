@@ -14,7 +14,7 @@
     $scope, $http, addonretriever,installer, settings, $log,
     SharedScopes, $translate
   ) {
-		const vm = this;
+		let vm = this;
 		this.sort ="name"
 
 		addonretriever.getAddons(function(addons) {
@@ -26,26 +26,20 @@
 		});
 
 		$scope.updateAllAddons = function(){
-			const updatelist = '';
-
-			for(let i = 0;i< vm.addons.length - 1;i++){
+			let updatelist = '';
+			for(let i = 0;i<vm.addons.length - 1;i++){
 				let addon = vm.addons[i]
-
 				if(addon.isUpdateAvailable){
-					installer.update(addon)
+					installer.update(vm.addons[i])
 					updatelist += addon.name + '\n';
 				}
 			}
 
-			if(updatelist !== ''){
-				alert(`${updatelist}${$translate.inject('ADDONS.UPDATE_LIST_SUCCESS')}`);
+			if(updatelist !== '')
+				alert(`${updatelist}${$translate.instant('ADDONS.UPDATE_LIST_SUCCESS')}`);
+			else
+				alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
 
-				setTimeout(()=>{
-					SharedScopes.getScope('TabController').reloadRoute()
-				}, 3000)
-			} else {
-        alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
-			}
 		}
 	}
 })();

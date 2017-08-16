@@ -106,12 +106,17 @@
 			fileRequest.on('response', function(response) {
 				$log.info(`status code: ${response.statusCode}`);
 				if(response.statusCode !== 200) {
-					if(scope)					
-					scope.$apply(function() {
+					if(scope){					
+						scope.$apply(function() {
+							addon.isDownloading = false;
+							addon.isInstalled = false;
+							addon.failedInstall = true;
+						});
+					}else{
 						addon.isDownloading = false;
 						addon.isInstalled = false;
-						addon.failedInstall = true;
-					});
+						addon.failedInstall = true;	
+					}
 
 					return;
 				} else {
@@ -119,12 +124,17 @@
 					var file = fs.createWriteStream(destinationFile);
 
 					fileRequest.on('error', function(error) {
-						if(scope)
-						scope.$apply(function() {
+						if(scope){
+							scope.$apply(function() {
+								addon.isDownloading = false;
+								addon.failedInstall = true;
+								addon.isInstalled = false;
+							});
+						}else{
 							addon.isDownloading = false;
 							addon.failedInstall = true;
 							addon.isInstalled = false;
-						});
+						}
 						fs.unlink(destinationFile);
 
 						return;
@@ -133,15 +143,21 @@
 					fileRequest.pipe(file);
 
 					file.on('finish', function() {
-						if(scope)
-						scope.$apply(function() {
+						if(scope){
+							scope.$apply(function() {
+								addon.isDownloading = false;
+								addon.isInstalled = true;
+								addon.failedInstall = false;
+								addon.isUpdateAvailable = false;
+								addon.installedFileVersion = addon.fileVersion;
+							});
+						}else{
 							addon.isDownloading = false;
 							addon.isInstalled = true;
 							addon.failedInstall = false;
 							addon.isUpdateAvailable = false;
 							addon.installedFileVersion = addon.fileVersion;
-						});
-
+						}	
 						file.close();
 						settings.addInstalledAddon(addon);
 
@@ -153,12 +169,16 @@
 					file.on('error', function(error) {
 						fs.unlink(destinationFile);
 						if(scope)
-						scope.$apply(function() {
+							scope.$apply(function() {
+								addon.isDownloading = false;
+								addon.failedInstall = true;
+								addon.isInstalled = false;
+							});
+						else{
 							addon.isDownloading = false;
 							addon.failedInstall = true;
-							addon.isInstalled = false;
-						});
-
+							addon.isInstalled = false;	
+						}
 						return;
 					});
 				}
