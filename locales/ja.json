@@ -39,8 +39,8 @@
         "INSTALL": "Install",
         "UPDATE": "Update",
         "UNINSTALL": "Uninstall",
-        "UPDATE_LIST_SUCCESS": "アップデートするアドオンがありません",
-        "UPDATE_LIST_BLANK": "をアップデートしました"
+        "UPDATE_LIST_SUCCESS": "をアップデートしました",
+        "UPDATE_LIST_BLANK": "アップデートするアドオンがありません"
     },
     "TOS": {
       "SITE_URL": "http://tos.nexon.co.jp/players"
