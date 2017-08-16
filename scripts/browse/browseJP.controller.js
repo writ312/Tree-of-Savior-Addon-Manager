@@ -17,6 +17,13 @@
 		let vm = this;
 		this.sort ="name"
 
+		require('electron-json-storage').get('settingCol', function(error, col) {
+			console.log(col)
+		    vm.col = col
+            if(typeof col == 'object' )
+                vm.col = 50
+        });
+
 		addonretriever.getAddons(function(addons) {
 			vm.addons = addons;
 		});
@@ -24,7 +31,13 @@
 		addonretriever.getDependencies(function(dependencies) {
 			$log.info(JSON.stringify(dependencies));
 		});
-
+	
+		this.changeCol = ()=>{
+			require('electron-json-storage').set('settingCol',vm.col, error =>{
+				console.log(error)
+			})
+		}
+		
 		$scope.updateAllAddons = function(){
 			let updatelist = '';
 			for(let i = 0;i<vm.addons.length - 1;i++){
