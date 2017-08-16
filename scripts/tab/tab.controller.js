@@ -24,10 +24,10 @@
 		};
 
 		vm.launchGame = function() {
-      const urlPath = $translate.instant('TOS.SITE_URL')
-      console.log(urlPath)
+			const urlPath = $translate.instant('TOS.SITE_URL')
+			console.log(urlPath)
 
-			require("shell").openExternal(urlPath);
+			require('electron').shell.openExternal(urlPath);
 		};
 
 		$scope.$watch('vm.selectedIndex', function(current, old) {

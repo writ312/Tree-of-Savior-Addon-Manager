@@ -41,16 +41,16 @@
 			scope.openWebsite = function(addon) {
 				// TODO: this needs to be a utility method
 				var repoUrl = "https://github.com/" + addon.repo;
-				require("shell").openExternal(repoUrl);
+				require('electron').shell.openExternal(repoUrl);
 			}
 
 			scope.openIssues = function(addon) {
 				var issuesUrl = "https://github.com/" + addon.repo + "/issues";
-				require("shell").openExternal(issuesUrl);
+				require('electron').shell.openExternal(issuesUrl);
 			}
 			scope.openTwitter = function(addon) {
 				var twitterUrl = "https://twitter.com/" + addon.twitterAccount;
-				require("shell").openExternal(twitterUrl);
+				require('electron').shell.openExternal(twitterUrl);
 			}
 
 			scope.openReadme = function(addon) {
