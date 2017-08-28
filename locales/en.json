@@ -7,7 +7,8 @@
     "FOOTER": {
         "RELOAD": "RELOAD",
         "SCROLL_TO_TOP": "BACK TO TOP",
-        "OPEN_OFFICIAL_SITE": "GO TO OFFICIAL SITE"
+        "OPEN_OFFICIAL_SITE": "GO TO OFFICIAL SITE",
+        "TRANSLATE_DESCRIPTION":"DOES TRANSLATE DESCRIPTION?"
     },
     "SETTINGS": {
         "NEED_UPDATE": "Update needed!",
