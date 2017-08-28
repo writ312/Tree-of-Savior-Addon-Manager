@@ -1,4 +1,3 @@
-
 {
     "TAB": {
         "SETTINGS": "設定",
@@ -43,6 +42,6 @@
         "UPDATE_LIST_BLANK": "アップデートするアドオンがありません"
     },
     "TOS": {
-      "SITE_URL": "http://tos.nexon.co.jp/players"
+        "SITE_URL": "http://tos.nexon.co.jp/players"
     }
 }
