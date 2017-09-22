@@ -28,7 +28,8 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
-    "phantomjs": "^1.9.19"
+    "phantomjs": "^1.9.19",
+    "electron": "1.4.2"
   },
   "dependencies": {
     "electron-json-storage": "^2.0.0",
