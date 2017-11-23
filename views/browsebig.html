@@ -1,0 +1,60 @@
+
+		<md-card md-whiteframe="3" id="{{browseController.addon.name}}">
+	<md-card-title>
+		<md-card-title-text>
+			<span class="md-headlines">{{ browseController.addon.name }}
+				<span class="md-subhead"> by {{browseController.addon.author}} - {{browseController.addon.fileVersion}}
+					
+
+			<span class="md-body-1">
+				<md-button data-ng-click="openWebsite(browseController.addon);" ng-style="photo.ovstyle" class="md-icon-button" aria-label="github">
+						<img src="{{ browseController.photo.github }}" ng-style="photo.style" alt="github">
+					</md-button>
+					<md-button  data-ng-show="browseController.addon.existTwitterAccount" ng-style="photo.ovstyle" class="md-icon-button" data-ng-click="openTwitter(browseController.addon);" aria-label="twitter">
+						 <img src="{{ browseController.photo.twitter }}" ng-style="photo.style" alt="twitter">
+					</md-button>
+			<md-menu>
+				Version: <md-button aria-label="browseController.addondropdown" ng-style="photo.ovstyle" class="md-icon-button" ng-click="openDropdownMenu($mdOpenMenu, $event)">
+					<img src="{{ browseController.photo.dropdn }}" ng-style="photo.style">
+				</md-button>
+				<md-menu-content width="6">
+					<md-menu-item ng-repeat="item in browseController.addon.browseController.addons">
+						<md-button ng-click="selectDropdown( item.obj )">
+							{{item.name}}
+						</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+
+			<!--You selected: {{selectedbrowseController.addon}}-->
+			</span>
+			</span>
+</span>
+
+			<!--<span class="md-subhead">{{browseController.addon.author}} {{browseController.addon.dateParsed}}</span>-->
+			<span class="md-body-1" data-ng-show="browseController.addon.isInstalled">Installed version: {{browseController.addon.installedFileVersion}}</span>
+			<span class="md-body-1">
+
+
+		<md-button	data-ng-show="browseController.addon.isNew" class="md-raised" data-ng-click="openReadme(browseController.addon);">New</md-button>
+		<md-button	data-ng-show="!browseController.addon.isShowReadme" class="md-raised" data-ng-click="openReadme(browseController.addon);">{{ 'ADDONS.README' | translate }}</md-button>
+		<md-button	data-ng-show="browseController.addon.isShowReadme"	class="md-raised" data-ng-click="closeReadme(browseController.addon);">{{ 'ADDONS.CLOSE_README' | translate }}</md-button>
+
+		<!--<md-button style="background-color:#55acee" >Twitter</md-button>-->
+		<!--<md-button data-ng-click="openWebsite(browseController.addon);" class="md-raised">GitHub</md-button>-->
+		<md-button data-ng-click="install(browseController.addon);" class="md-raised md-primary" data-ng-class="{'md-warn': browseController.addon.failedInstall}" data-ng-show="!browseController.addon.isDownloading && !browseController.addon.isInstalled">{{ 'ADDONS.INSTALL' | translate }}</md-button>
+		<md-button data-ng-click="update(browseController.addon);" class="md-raised md-accent" data-ng-class="{'md-warn': browseController.addon.failedInstall}" data-ng-show="browseController.addon.isUpdateAvailable && browseController.addon.isInstalled">{{ 'ADDONS.UPDATE' | translate }}</md-button>
+		<md-button data-ng-click="uninstall(browseController.addon);" class="md-raised md-warn" data-ng-show="browseController.addon.isInstalled && !browseController.addon.failedInstall">{{ 'ADDONS.UNINSTALL' | translate }}</md-button>
+		<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addon.isDownloading"></md-progress-circular>
+
+
+			</span>
+			<span data-ng-show="browseController.addon.failedInstall"><p class="error">Failed to install browseController.addon. Please contact <a href data-ng-click="openIssues(browseController.addon);">{{browseController.addon.author}}</a>.</p></span>
+			<span data-ng-show="browseController.addon.uninstallError"><p class="error">Could not uninstall browseController.addon. Make sure the game is closed and then try again.</p></span>
+			<p ng-bind-html="browseController.addon.readme" class ="markdown-body"></p>
+		</md-card-title-text>
+	</md-card-title>
+</md-card>
+
+
+

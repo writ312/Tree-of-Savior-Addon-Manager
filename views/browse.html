@@ -37,6 +37,11 @@
 			</md-radio-group>
 		</div>
 	</md-card>
+
+	    <div layout="row" data-ng-show="browseController.addonsLoading" layout-sm="column" layout-align="center center" aria-label="wait" style="height:70px;">
+	   		<md-progress-circular md-mode="indeterminate" data-ng-show="browseController.addonsLoading"></md-progress-circular>
+	    </div>
+
 	<div layout="row" layout-wrap>
 		<div flex="{{browseController.col}}" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
 			<addon addon="addon"></addon>

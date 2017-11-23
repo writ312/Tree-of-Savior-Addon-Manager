@@ -43,6 +43,11 @@
 					url: '/installed',
 					templateUrl: 'views/installed.html',
 					controller: 'InstalledController as vm'
+				})
+				.state('addonbig', {
+					url: '/browseBig',
+					templateUrl: 'views/browseBig.html',
+					controller: 'AddonBigController as browseController'
 				});
 
 			$mdThemingProvider.theme('default')

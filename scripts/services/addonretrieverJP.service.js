@@ -38,6 +38,12 @@
 
 							$log.info("Loading addon " + addon.name + " by " + addon.author);
 
+
+							addon.shortname = addon.name;
+							if(addon.shortname.length > 25) {
+								addon.shortname = addon.shortname.substring(0,24)+"...";
+							}
+
 							addon.twitterAccount = source.twitter
 							$log.info(source.twitter);
 

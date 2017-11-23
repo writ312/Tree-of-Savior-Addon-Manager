@@ -10,7 +10,7 @@
 			scope: {},
 			restrict: 'E',
 			link: link,
-			templateUrl: 'views/addon.html',
+			templateUrl: 'views/addon_small.html',
 			controller: AddonController,
 			controllerAs: "vm",
 			bindToController: {
@@ -20,9 +20,39 @@
 		var isShowReadme = false;
 		var isLoadedReadme = false;
 
+
 		return directive;
 
 		function link(scope, element, attrs) {
+
+			scope.buttons = {
+				download: 'img/download.png',
+				more: 'img/more.png',
+				uninstall: 'img/uninstall.png',
+				update: 'img/update.png',
+				style: {
+					width: '32px',
+					height: '32px'
+				},
+				ovstyle: {
+					width: '32px',
+					height: '32px'
+				}
+			}
+			scope.photo = {
+				twitter: 'img/twitter.png',
+				github : 'img/GitHub-Mark-64px.png',
+				dropdn : 'img/dropdown-arrow-down.png',
+				style: {
+					width: '16px',
+					height: '16px'
+				},
+				ovstyle: {
+					width: '26px',
+					height: '16px'
+				}
+			};
+
 			scope.install = function(addon) {
 				addon.isDownloading = true;
 				installer.install(addon, scope, function() {
@@ -86,6 +116,37 @@
 					return addon.description
 				else
 					return addon.transDesc[$translate.proposedLanguage()]	
+			}
+
+			scope.openDropdownMenu = function($mdOpenMenu, ev)
+			{
+      			$mdOpenMenu(ev);
+			}
+
+			scope.selectDropdown = function(selectedAddon)
+			{
+				var _old_addon = scope.vm.addon;
+				scope.vm.addon = selectedAddon;
+				//copy list
+				scope.vm.addon.addons = _old_addon.addons;
+				
+			}
+
+			scope.safeApply = function(fn) {
+				var phase = scope.$root.$$phase;
+				if(phase == '$apply' || phase == '$digest') {
+					if(fn && (typeof(fn) === 'function')) {
+						fn();
+					}
+				} else {
+					scope.$apply(fn);
+				}
+			};
+
+			scope.changeToBig = function(addon)
+			{
+				$location.url('/browseBig');
+				$location.selectedAddon = addon;
 			}
 
 			scope.doesTranslateDescription = ()=>{return settings.doesTransDesc}
