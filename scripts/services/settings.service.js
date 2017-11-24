@@ -36,6 +36,11 @@
 					data.installedAddons = {};
 				}
 
+				//null-ing vars that don't need to be saved (and we don't need anymore at this point)
+				addon.addons = null;
+				addon.addonsL = null;
+				addon.isShowThisDescription = null;
+
 				data.installedAddons[addon.file] = addon;
 				saveInstalledAddons(data);
 

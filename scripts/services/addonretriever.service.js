@@ -5,9 +5,9 @@
 		.module('app')
 		.factory('addonretriever', addonretriever);
 
-	addonretriever.$inject = ['$log', '$http', 'settings','$translate','$q'];
+	addonretriever.$inject = ['$log', '$http', 'settings','$translate','$q', '$sce'];
 
-	function addonretriever($log, $http, settings ,$translate, $q) {
+	function addonretriever($log, $http, settings ,$translate, $q, $sce) {
 		var masterSources = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
 
 		var service = {
@@ -56,13 +56,22 @@
 									$log.info("Loading addon " + addon.name + " by " + addon.author);
 
 									addon.shortname = addon.name;
+									addon.nameSce = $sce.trustAsHtml(addon.name);
 									if(addon.shortname.length > 25) {
 										addon.shortname = addon.shortname.substring(0,24)+"...";
 									}
 
+									addon.twitterAccount = source.twitter
+									$log.info(source.twitter);
+
+									if (addon.twitterAccount) 
+										addon.existTwitterAccount = true
+
 									for(var attributeName in source) {
 										addon[attributeName] = source[attributeName];
 									}
+
+									addon.descriptionSce = $sce.trustAsHtml(addon.description);
 
 									addon.downloadUrl = "https://github.com/" + source.repo + "/releases/download/" + addon.releaseTag + "/" + addon.file + "-" + addon.fileVersion + "." + addon.extension;
 									addon.isDownloading = false;
@@ -104,7 +113,7 @@
 									addon.transDesc = {}
 									let db = settings.translateDB
 									if(db[addon.name] && (db[addon.name].fileVersion == addon.fileVersion) && Object.keys(db[addon.name].transDesc).length){
-										addon.transDesc = JSON.parse(db[addon.name].transDesc)
+										addon.transDesc = JSON.parse(db[addon.name].transDesc);
 									}else{
 										var request = require('request')
 										request.get({
@@ -187,6 +196,41 @@
 							idx++;
 						});
 						$log.info("finished");
+
+						angular.forEach(addons, function(addon){
+							var hasInstalled = false;
+							angular.forEach(addon.addons, function(addonObj){
+								if(!hasInstalled)
+								{
+									//check for installed addons and swap
+									var addonToCheck = addonObj.obj;
+
+									if(addonToCheck.isInstalled)
+									{
+										//addon gets replaced with addontocheck
+										var idx = addons.indexOf(addon);
+										var toCheck = addon.addons;
+										addons[idx] = addonToCheck;
+										addons[idx].addons = toCheck;
+										hasInstalled = true;
+									}
+									//newest version to front
+									var semver = require('semver');
+									try {
+										if(semver.gt(addonToCheck.fileVersion, addon.fileVersion))
+										{
+											var idx = addons.indexOf(addon);
+											var toCheck = addon.addons;
+											addons[idx] = addonToCheck;
+											addons[idx].addons = toCheck;
+										}
+									}catch(err) {
+										$log.info("semver version error");
+									}
+								}
+							});
+						});
+
 						callback(addons);
 					},function(reason) {
 						console.dir(reason);

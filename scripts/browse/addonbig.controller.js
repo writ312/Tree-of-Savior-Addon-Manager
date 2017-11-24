@@ -17,20 +17,26 @@
 		const vm = this;
 		this.sort = "name";
 
+		this.buttons = {
+			download: 'img/download.png',
+			more: 'img/more.png',
+			uninstall: 'img/uninstall.png',
+			update: 'img/update.png',
+			style: {
+				width: '32px',
+				height: '32px'
+			}
+		}
+
 		this.photo = {
-				twitter: 'img/twitter.png',
-				github : 'img/GitHub-Mark-64px.png',
-				dropdn : 'img/dropdown-arrow-down.png',
-				download: 'img/download.png',
-				style: {
-					width: '16px',
-					height: '16px'
-				},
-				ovstyle: {
-					width: '26px',
-					height: '16px'
-				}
-			};
+			twitter: 'img/twitter.png',
+			github : 'img/GitHub-Mark-64px.png',
+			dropdn : 'img/dropdown-arrow-down.png',
+			style: {
+				width: '16px',
+				height: '16px'
+			}
+		};
 
 		require('electron-json-storage').get('settingCol', function(error, col) {
 			console.log(col)

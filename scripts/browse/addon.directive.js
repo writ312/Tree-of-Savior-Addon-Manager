@@ -33,10 +33,6 @@
 				style: {
 					width: '32px',
 					height: '32px'
-				},
-				ovstyle: {
-					width: '32px',
-					height: '32px'
 				}
 			}
 			scope.photo = {
@@ -45,10 +41,6 @@
 				dropdn : 'img/dropdown-arrow-down.png',
 				style: {
 					width: '16px',
-					height: '16px'
-				},
-				ovstyle: {
-					width: '26px',
 					height: '16px'
 				}
 			};

@@ -24,8 +24,11 @@
                 vm.col = 50
         });
 
+        this.addonsLoading = true;
+
 		addonretriever.getAddons(function(addons) {
 			vm.addons = addons;
+			vm.addonsLoading = false;
 		});
 
 		addonretriever.getDependencies(function(dependencies) {

@@ -46,7 +46,7 @@
 				})
 				.state('addonbig', {
 					url: '/browseBig',
-					templateUrl: 'views/browseBig.html',
+					templateUrl: 'views/browsebig.html',
 					controller: 'AddonBigController as browseController'
 				});
 
