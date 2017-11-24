@@ -1,7 +1,7 @@
 <div layout="column" layout-padding>
 	<md-card style="height:65px" md-whiteframe="3">
 		<md-input-container  class="md-block">
-			<label><img id = "search"src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
+			<label><img id="search" src="img/search.png"  alt="search">{{ 'BROWSE.SEARCH' | translate }}</label>
 			<input data-ng-model="browseController.searchQuery">
 		</md-input-container>
 	</md-card>
@@ -43,7 +43,7 @@
 	    </div>
 
 	<div layout="row" layout-wrap>
-		<div flex="{{browseController.col}}" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter:browseController.searchQuery">
+		<div flex="{{browseController.col}}" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: {name: browseController.searchQuery}">
 			<addon addon="addon"></addon>
 		</div>
 	</div>
