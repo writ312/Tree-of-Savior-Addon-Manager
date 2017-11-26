@@ -30,6 +30,7 @@
 				more: 'img/more.png',
 				uninstall: 'img/uninstall.png',
 				update: 'img/update.png',
+				notification: 'img/notification.png',
 				style: {
 					width: '32px',
 					height: '32px'

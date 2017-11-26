@@ -67,9 +67,15 @@
 									if (addon.twitterAccount) 
 										addon.existTwitterAccount = true
 
+									if(!addon.tosversion)
+										addon.tosversion = settings.TOSVersion;
+
 									for(var attributeName in source) {
 										addon[attributeName] = source[attributeName];
 									}
+
+									addon.isOutdated = settings.isAddonOutdated(addon);
+									addon.isBroken = settings.isBrokenAddon(addon);
 
 									addon.descriptionSce = $sce.trustAsHtml(addon.description);
 
@@ -149,6 +155,7 @@
 									}
 
 
+
 									
 									var doAddSame = false;
 
@@ -199,13 +206,14 @@
 
 						angular.forEach(addons, function(addon){
 							var hasInstalled = false;
+
 							angular.forEach(addon.addons, function(addonObj){
+								var addonToCheck = addonObj.obj;
+
 								if(!hasInstalled)
 								{
-									//check for installed addons and swap
-									var addonToCheck = addonObj.obj;
-
-									if(addonToCheck.isInstalled)
+									//check for installed addons and swap									
+									if(addonToCheck.isInstalled && addonToCheck.installedFileVersion == addonToCheck.fileVersion)
 									{
 										//addon gets replaced with addontocheck
 										var idx = addons.indexOf(addon);
@@ -229,6 +237,7 @@
 									}
 								}
 							});
+
 						});
 
 						callback(addons);
