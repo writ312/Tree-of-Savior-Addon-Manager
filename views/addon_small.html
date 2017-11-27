@@ -1,9 +1,9 @@
 <md-card md-whiteframe="3" id="{{vm.addon.name}}" ng-style="vm.addon.isBroken && {'background-color': 'rgba(255,128,0,0.5)'}">
 	<md-card-title>
 		<md-card-title-text>
-			<span class="md-headlines" style="display:inline-block;">
-				<span class="md-headlines">
-					<md-tooltip md-direction="bottom" >
+			<span class="md-headlines" style="display:inline-block;position:relative;">
+				<span class="md-headlines" style="float:left;">
+					<md-tooltip md-direction="bottom">
 						<div ng-bind-html="vm.addon.nameSce"></div>
 						<div class="md-body-2" style="color:rgb(180,180,180);">Tags:
 							<div data-ng-repeat="tag in vm.addon.tags" style="display:inline-block;">
@@ -20,16 +20,16 @@
 						 by {{vm.addon.author}} - {{vm.addon.fileVersion}} 
 					</span>
 				</span>
-				<span class="md-subhead">
-					<md-menu>
+				<span class="md-subhead" style="float:right;position:absolute;margin-top:-30px;">
+					<md-menu ng-show="getAddonList(vm.addon).length > 1">
 						<md-button aria-label="addondropdown" class="md-icon-button" ng-click="openDropdownMenu($mdOpenMenu, $event)">
-							<md-tooltip md-direction="bottom">Version select</md-tooltip>
+							<md-tooltip md-direction="bottom">{{getAddonList(vm.addon).length}} versions to select</md-tooltip>
 							<img ng-src="{{ photo.dropdn }}" ng-style="photo.style">
 						</md-button>
 						<md-menu-content width="6">
-							<md-menu-item ng-repeat="item in vm.addon.addons">
-								<md-button ng-click="selectDropdown( item.obj )">
-									{{item.name}} - {{item.obj.fileVersion}}
+							<md-menu-item ng-repeat="item in getAddonList(vm.addon)">
+								<md-button ng-click="selectDropdown( item )">
+									{{item.name}} - {{item.fileVersion}}
 								</md-button>
 							</md-menu-item>
 						</md-menu-content>

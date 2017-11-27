@@ -24,6 +24,7 @@
 					$log.info("Loading master sources from " + masterSources);
 
 					var addons = [];
+					var addonList = {};
 					var ITos = settings.ITos;
 					var sameAddons = [];
 					var inList = [];
@@ -38,16 +39,12 @@
 					});
 
 					$q.all(arr).then(function(sourceData){
-						$log.info("src size: "+sourceData.length);
 						var idx = 0;
 						angular.forEach(sourceData, function(srcdata) {
 							var source = sourceArr[idx];
 							if(srcdata)
 							{
 								angular.forEach(srcdata.data, function(addon) {
-									addon.addons = [];
-									addon.addonsL = [];
-
 									var repoValues = source.repo.split('/');
 
 									addon.author = repoValues[0];
@@ -172,11 +169,12 @@
 											{
 												if(sim >= 0.75) //if the similarity is >= 75% we add it to the list
 												{
-													if(!samead.obj.addonsL.includes(addon.name))
+													var idx = addonList[samead.name].addons.indexOf(addon);
+													if(idx == -1)
 													{
-														samead.obj.addonsL.push(addon.name);
-														samead.obj.addons.push({name: addon.name, obj: addon}); //we add it to this list
-														//and then remove it from the display list
+														addon.similarto = samead.name;
+														addonList[samead.name].addons.push(addon);
+
 														doAddSame = false;
 
 														break;
@@ -194,9 +192,14 @@
 									if(doAddSame || sameAddons.length === 0)
 									{
 										sameAddons.push({name: addon.name, obj: addon})
-										addon.addons.push({name: addon.name, obj: addon});
 										inList.push(addon.name);
 										addons.push(addon);
+										addon.similarto = addon.name;
+
+										addonList[addon.name] = {
+											obj: addon,
+											addons: [addon]
+										};
 									}
 								});
 							}
@@ -207,8 +210,8 @@
 						angular.forEach(addons, function(addon){
 							var hasInstalled = false;
 
-							angular.forEach(addon.addons, function(addonObj){
-								var addonToCheck = addonObj.obj;
+							angular.forEach(addonList[addon.name].addons, function(addonObj){
+								var addonToCheck = addonObj;
 
 								if(!hasInstalled)
 								{
@@ -217,9 +220,8 @@
 									{
 										//addon gets replaced with addontocheck
 										var idx = addons.indexOf(addon);
-										var toCheck = addon.addons;
 										addons[idx] = addonToCheck;
-										addons[idx].addons = toCheck;
+
 										hasInstalled = true;
 									}
 									//newest version to front
@@ -228,9 +230,7 @@
 										if(semver.gt(addonToCheck.fileVersion, addon.fileVersion))
 										{
 											var idx = addons.indexOf(addon);
-											var toCheck = addon.addons;
 											addons[idx] = addonToCheck;
-											addons[idx].addons = toCheck;
 										}
 									}catch(err) {
 										$log.info("semver version error");
@@ -240,7 +240,7 @@
 
 						});
 
-						callback(addons);
+						callback(addons, addonList);
 					},function(reason) {
 						console.dir(reason);
 					});

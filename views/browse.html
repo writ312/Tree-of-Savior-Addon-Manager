@@ -43,7 +43,7 @@
 	</div>
 
 	<div layout="row" layout-wrap>
-		<div flex="50" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: filterAll(browseController.searchQuery)">
+		<div flex="50" data-ng-repeat="addon in browseController.addons | orderBy:browseController.sort | filter:{ isUpdateAvailable: browseController.isUpdateAvailable, isInstalled: browseController.isInstalled } | filter: browseController.searchQuery">
 			<addon addon="addon"></addon>
 		</div>
 	</div>

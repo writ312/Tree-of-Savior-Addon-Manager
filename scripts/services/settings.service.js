@@ -29,6 +29,7 @@
 			getBrokenAddons : getBrokenAddons,
 			isAddonOutdated : isAddonOutdated,
 			isBrokenAddon : isBrokenAddon,
+			addonList : {},
 			JTos : {},
 			ITos : {}
 		};
@@ -77,18 +78,8 @@
 					data.installedAddons = {};
 				}
 
-				//null-ing vars that don't need to be saved
-				var addonsS = addon.addons;
-				var addonsL = addon.addonsL;
-				addon.addons = null;
-				addon.addonsL = null;
-				addon.isShowThisDescription = null;
-
 				data.installedAddons[addon.file] = addon;
 				saveInstalledAddons(data);
-
-				addon.addons = addonsS;
-				addon.addonsL = addonsL;
 
 				$log.info("Saved adding addon: " + addon.file);
 			});

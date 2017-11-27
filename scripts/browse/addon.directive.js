@@ -5,7 +5,7 @@
 		.module('app')
 		.directive('addon', addon);
 
-	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings,$translate) {
+	function addon($log, $compile, $sce,  $location,  $anchorScroll ,installer, readmeretriever ,settings, $translate) {
 		var directive = {
 			scope: {},
 			restrict: 'E',
@@ -118,11 +118,12 @@
 
 			scope.selectDropdown = function(selectedAddon)
 			{
-				var _old_addon = scope.vm.addon;
 				scope.vm.addon = selectedAddon;
-				//copy list
-				scope.vm.addon.addons = _old_addon.addons;
-				
+			}
+
+			scope.getAddonList = function(selectedAddon)
+			{
+				return settings.addonList[selectedAddon.similarto].addons;
 			}
 
 			scope.safeApply = function(fn) {

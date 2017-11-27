@@ -26,9 +26,10 @@
 
         this.addonsLoading = true;
 
-		addonretriever.getAddons(function(addons) {
+		addonretriever.getAddons(function(addons, addonList) {
 			vm.addons = addons;
 			vm.addonsLoading = false;
+			settings.addonList = addonList;
 		});
 
 		addonretriever.getDependencies(function(dependencies) {
@@ -56,48 +57,6 @@
 			else
 				alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
 
-		}
-
-		$scope.filterAll = function( search ) {
-			return function(addon){
-				var addAddon,id;
-
-				if(!search)
-					search = "";
-				addAddon = false;
-				if (checkFor(addon.author.toLowerCase(), search.toLowerCase()) || checkFor(addon.name.toLowerCase(), search.toLowerCase()))
-					addAddon = true;
-
-				for(id=0;id<addon.tags.length;id++)
-				{
-					if(checkFor(addon.tags[id].toLowerCase(), search.toLowerCase()))
-						addAddon = true;
-				}
-
-				if (addAddon)
-					return true;
-
-				return false;
-			};
-
-		};
-
-		function checkFor(str, str2)
-		{
-			var i;
-			var maxl = str.length
-			var ok=true;
-			for(i=0;i<str2.length;i++)
-			{
-				if(i > maxl)
-					break;
-				if(str[i] != str2[i])
-				{
-					return false;
-					break;
-				}
-			}
-			return ok;
 		}
 	}
 })();
