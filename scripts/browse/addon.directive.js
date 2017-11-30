@@ -47,17 +47,24 @@
 			};
 
 			scope.install = function(addon) {
+				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				addon.isDownloading = true;
 				installer.install(addon, scope, function() {
 					addon.isDownloading = false;
+					settings.addonList[addon.similarto].addons[idx] = addon;
 				});
 			}
 			scope.uninstall = function(addon) {
+				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.uninstall(addon, scope);
+				//update the list
+				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.update = function(addon) {
+				var idx = settings.addonList[addon.similarto].addons.indexOf(addon);
 				installer.update(addon, scope);
+				settings.addonList[addon.similarto].addons[idx] = addon;
 			}
 
 			scope.openWebsite = function(addon) {

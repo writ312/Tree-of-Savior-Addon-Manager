@@ -172,6 +172,7 @@
 											{
 												var idx = addonList[samead.name].addons.indexOf(addon);
 												if(idx == -1)
+												{
 													addon.similarto = samead.name;
 													addonList[samead.name].addons.push(addon);
 
