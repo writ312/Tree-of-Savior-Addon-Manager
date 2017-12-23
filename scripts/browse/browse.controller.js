@@ -15,7 +15,8 @@
     SharedScopes, $translate
   ) {
 		const vm = this;
-		this.sort = "name";
+		vm.sort = "name";
+		vm.isShowDetail = false
 
 		require('electron-json-storage').get('settingCol', function(error, col) {
 			console.log(col)
@@ -56,6 +57,16 @@
 				alert(`${updatelist}${$translate.instant('ADDONS.UPDATE_LIST_SUCCESS')}`);
 			else
 				alert($translate.instant('ADDONS.UPDATE_LIST_BLANK'));
+		}
+		$scope.openReadme = function() {
+			if(!vm.isShowDetail){
+				return;
+			}
+			let addon = vm.addon
+			$log.info("Opening readme");
+		}
+		$scope.testFunction = function(){
+			console.log(vm)
 		}
 	}
 

@@ -17,7 +17,7 @@
 		vm.thisVersion = require('./package.json').version;
 		vm.latestVersion = vm.thisVersion
 		var JTosSource = "https://raw.githubusercontent.com/JTosAddon/Addons/master/managers.json";
-		getAddonsDate($http,vm,JTosSource,settings.JTos)
+		// getAddonsDate($http,vm,JTosSource,settings.JTos)
 		var ITosSource = "https://raw.githubusercontent.com/JTosAddon/Addons/itos/managers.json";
 		getAddonsDate($http,vm,ITosSource,settings.ITos)
 
